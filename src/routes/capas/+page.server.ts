@@ -1,21 +1,17 @@
-// since there's no dynamic data here, we can prerender
-// it so that it gets served as a static asset in production
-// export const prerender = true;
+//We are utilizing the Mongo database and want this code to ONLY run "server-side", 
+//so we want to name this file: page.server.ts
 import type {PageServerLoad} from './$types'
+import { capaReports } from "$capas"
 import db from "$lib/db"
-// export async function GET() {
-//   const cars = await db.collection('cars').find().toArray()
-//   return {
-//     status: 200,
-//     body: { cars }
-//   }
-// }
 
 export const load: PageServerLoad = async function() {
-	const capas = db.collection('capas').find().toArray;
+	const data = await capaReports.find({}, {_id:0, limit: 50, projection: {
+		capaNumber: 1
+	}}).toArray();
+
+	console.log('data', data);
 
 	return {
-		status: 200,
-    body: { capas }
+		capaReports: JSON.parse(JSON.stringify(data))
 	}
 }

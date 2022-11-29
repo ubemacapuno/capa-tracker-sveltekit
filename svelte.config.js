@@ -7,6 +7,7 @@ const config = {
     adapter: adapter(),
     alias: {
       $db: './src/lib/db',
+      $capas: './src/lib/models/capas'
     }
   },
   preprocess: [

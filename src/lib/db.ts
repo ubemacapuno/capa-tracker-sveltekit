@@ -12,4 +12,4 @@ export function start_mongo(){
     return client.connect()
 }
 
-export default client.db('CapaReports') // select database
+export default client.db() // select database
