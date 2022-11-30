@@ -7,7 +7,7 @@
 <div class="flex flex-col min-h-screen">
 	<Header />
 
-	<main class="box-border flex flex-1 flex-col p-1 w-full max-w-5xl my-0 mx-auto">
+	<main class="flex justify-center content-center flex-col">
 		<slot />
 	</main>
 
