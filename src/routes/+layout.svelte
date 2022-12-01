@@ -4,12 +4,11 @@
 	// import './styles.css';
 	import "../app.css";
 </script>
-<div class="flex flex-col min-h-screen">
+<div class="flex flex-col min-h-screen relative pb-7">
 	<Header />
 
 	<main class="flex justify-center content-center flex-col">
 		<slot />
 	</main>
-
 	<Footer />
 </div>
