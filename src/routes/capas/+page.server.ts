@@ -7,7 +7,7 @@ import db from "$lib/db"
 //"GET" may not be needed for the function to work properly
 //But this is the "GET" request for getting the capaReports from the db:
 export const load: PageServerLoad = async function() {
-	const data = await capaReports.find({}, {_id:0, limit: 50, projection: {
+	const data = await capaReports.find({}, {_id:0, limit: 500, projection: {
 		capaNumber: 1,
 		capaStatus: 1,
 		capaPhase: 1,

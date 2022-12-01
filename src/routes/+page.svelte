@@ -1,5 +1,5 @@
 <script>
-	import Counter from './Counter.svelte';
+
 </script>
 
 <svelte:head>
@@ -9,9 +9,7 @@
 
 <section>
 	<h1>
-		Home
+		Dashboard
 	</h1>
 
-	<Counter />
-	<a href="/capas">Browse CAPAS</a>
 </section>

@@ -4,7 +4,7 @@
 	export let data: PageData;
   $: ({capaReports} = data)
   </script>
-  <h1>See CAPAs:</h1>
+  <h1>Total CAPAs: {capaReports.length}</h1>
   {#each capaReports as capa}
     <div class="my-4 card w-80 bg-neutral text-primary-content self-center">
       <div class="card-body">
@@ -12,9 +12,9 @@
         <p class="text-secondary">{capa.capaStatus}</p>
         <p>{capa.capaPhase} Phase</p>
         <p>{capa.problemStatement}</p>
-        <p>Date Created: {capa.dateCapaCreated.slice(0,10)} UTC</p>
-        <p>Date Approved: {capa.dateCapaApproved.slice(0,10)} UTC</p>
-        <p>Phase Due Date: {capa.currentPhaseDueDate.slice(0,10)} UTC</p>
+        <p>Date Created: {capa.dateCapaCreated.slice(0,10)}</p>
+        <p>Date Approved: {capa.dateCapaApproved.slice(0,10)}</p>
+        <p>Phase Due Date: {capa.currentPhaseDueDate.slice(0,10)}</p>
         <div class="card-actions justify-end">
         <a href="#" class="btn btn-primary">View</a>
         </div>
