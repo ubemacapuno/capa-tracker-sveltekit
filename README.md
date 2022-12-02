@@ -15,6 +15,10 @@ Front-end: SvelteKit, Tailwind/DaisyUI
 
 Back-end: TBD
 
+## TO DO:
+
+Learn load functions and complete SvelteKit CRUD functionality with MongoDB using +page.server.ts files
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
