@@ -3,6 +3,8 @@
     
 	export let data: PageData;
   $: ({capaReports} = data)
+
+  
   </script>
   <h1>Total CAPAs: {capaReports.length}</h1>
   {#each capaReports as capa}

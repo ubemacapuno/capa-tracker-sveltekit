@@ -5,6 +5,9 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
+		"start": "node dist/index.js",
+		"server:dev": "nodemon ./server/index.ts",
+		"server:build": "tsc -p .",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
@@ -16,12 +19,17 @@
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"@types/cookie": "^0.5.1",
+		"@types/cors": "^2.8.13",
+		"@types/express": "^4.17.14",
+		"@types/morgan": "^1.9.3",
+		"@types/node": "^18.11.12",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.13",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
+		"nodemon": "^2.0.20",
 		"postcss": "^8.4.19",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
@@ -29,13 +37,17 @@
 		"svelte-check": "^2.9.2",
 		"svelte-preprocess": "^4.10.7",
 		"tailwindcss": "^3.2.4",
+		"ts-node": "^10.9.1",
 		"tslib": "^2.4.1",
-		"typescript": "^4.9.3",
+		"typescript": "^4.9.4",
 		"vite": "^3.2.4"
 	},
 	"type": "module",
 	"dependencies": {
+		"cors": "^2.8.5",
 		"daisyui": "^2.42.1",
-		"mongodb": "^4.12.1"
+		"express": "^4.18.2",
+		"mongodb": "^4.12.1",
+		"morgan": "^1.10.0"
 	}
 }
