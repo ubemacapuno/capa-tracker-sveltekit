@@ -6,7 +6,7 @@ import { capaReports } from "$capas"
 //"GET" may not be needed for the function to work properly
 //But this is the "GET" request for getting the capaReports from the db:
 export const load: PageServerLoad = async function() {
-	const data = await capaReports.find({}, {limit: 500, projection: {
+	const data = await capaReports.findOne({_id: capaReports(slug)}, {limit: 500, projection: {
 		capaNumber: 1,
 		capaStatus: 1,
 		capaPhase: 1,
@@ -16,7 +16,7 @@ export const load: PageServerLoad = async function() {
 		currentPhaseDueDate: 1,
 		productImpacted: 1,
 
-	}}).toArray();
+	}});
 
 	// console.log('data', data);
 	console.log('data', JSON.parse(JSON.stringify(data)));

@@ -15,8 +15,9 @@
         <p>Date Created: {capa.dateCapaCreated.slice(0,10)}</p>
         <p>Date Approved: {capa.dateCapaApproved.slice(0,10)}</p>
         <p>Phase Due Date: {capa.currentPhaseDueDate.slice(0,10)}</p>
-        <div class="card-actions justify-end">
+        <div class="card-actions justify-end btn-group">
         <a href="#" class="btn btn-primary">View</a>
+        <a href="#" class="btn btn-accent">Delete</a>
         </div>
       </div>
     </div>
