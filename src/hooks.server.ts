@@ -1,5 +1,5 @@
 // import { start_mongo } from "./lib/db";
-import { start_mongo } from "$db";
+import { start_mongo } from "$db"; //using "aliased" version in svelte.config.js
 
 start_mongo().then(() => {
     console.log("Mongo DB Started!")

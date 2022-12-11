@@ -24,3 +24,24 @@ export const load: PageServerLoad = async function() {
 		capaReports: JSON.parse(JSON.stringify(data))
 	}
 }
+
+// export const add: PageServerLoad = async function() {
+// 	const doc = {
+// 		capaNumber: "12/11 test",
+// 		capaStatus: "12/11 test",
+// 		capaPhase: "12/11 test",
+// 		dateCapaCreated: "12/11 test",
+// 		problemStatement: "12/11 test",
+// 		dateCapaApproved: "12/11 test",
+// 		currentPhaseDueDate: "12/11 test",
+// 		productImpacted: "12/11 test",
+// 	}
+
+// 	const data = await capaReports.insertOne(doc)
+
+// 	// console.log('data', data);
+// 	console.log('data', JSON.parse(JSON.stringify(data)));
+// 	return {
+// 		capaReports: JSON.parse(JSON.stringify(data))
+// 	}
+// }
