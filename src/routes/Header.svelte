@@ -1,3 +1,19 @@
+<script lang="ts">
+	import { enhance } from "$app/forms";
+	import { page } from "$app/stores"
+	import Dark from "$lib/icons/Dark.svg";
+
+	let userTheme = 'dark'
+	const submitUpdateTheme: SubmitFunction = ({ action }) => {
+		const theme = action.searchParams.get('theme');
+		userTheme = theme
+		if (theme) {
+			document.documentElement.setAttribute('data-theme', theme);
+		}
+	};
+
+
+</script>
 <header>
 	<div class="navbar bg-base-100">
 		<div class="navbar-start">
@@ -20,6 +36,15 @@
 		  </ul>
 		</div>
 		<div class="navbar-end">
+	
+			<form method="POST" use:enhance={submitUpdateTheme}>
+				{#if userTheme === "dark"}
+					<button class="mx-6 light btn btn-circle btn-outline btn-primary" formaction="/?/setTheme&theme=light&redirectTo={$page.url.pathname}"></button>
+				{:else}
+					<button class="mx-6 dark btn btn-circle btn-outline btn-secondary" formaction="/?/setTheme&theme=dark&redirectTo={$page.url.pathname}"></button>
+				{/if}
+			</form>
+
 		  <a href="#my-modal-2" class="btn">Logout</a>
 		</div>
 	</div>
@@ -33,3 +58,18 @@
 		</div>
 	  </div>
 </header>
+
+<style>
+	.light::before {
+		content: url('../lib/icons/Light.svg');
+		width: 30px;
+		height: 30px;
+	}
+
+	.dark::before {
+		content: url('../lib/icons/Dark.svg');
+		width: 30px;
+		height: 30px;
+	}
+	
+</style>
