@@ -22,6 +22,9 @@
 				</label>
 				<ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box border-2 border-base-content w-52 bg-neutral">
 					<li><a class="text-accent" href="/about">About</a></li>
+					{#if $page.data.session}
+						<li><a class="text-accent" href="/">Dashboard</a></li>
+					{/if}
 					<li><a class="text-accent" href="/capas">View</a></li>
 					<li class="self-center">
 						<form method="POST" use:enhance={submitUpdateTheme}>
