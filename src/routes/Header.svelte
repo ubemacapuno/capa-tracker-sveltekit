@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import { page } from "$app/stores"
-	import Dark from "$lib/icons/Dark.svg";
+	import { signIn, signOut } from "@auth/sveltekit/client"
 
 	let userTheme = 'dark'
 	const submitUpdateTheme: SubmitFunction = ({ action }) => {
@@ -45,7 +45,22 @@
 				{/if}
 			</form>
 
-		  <a href="#my-modal-2" class="btn">Logout</a>
+			<p>
+				{#if $page.data.session}
+					{#if $page.data.session.user?.image}
+					<span
+						style="background-image: url('{$page.data.session.user.image}')"
+						class="avatar"
+					/>
+					{/if}
+					<span class="signedInText">
+					<strong class="mx-2 text-accent">{$page.data.session.user?.name ?? "User"}</strong>
+					</span>
+					<button class="btn btn-primary" on:click={() => signOut()}>Sign out</button>
+				{:else}
+					<button class="btn btn-primary" on:click={() => signIn("github")}>Login</button>
+				{/if}
+			</p>
 		</div>
 	</div>
 	  <div class="modal" id="my-modal-2">

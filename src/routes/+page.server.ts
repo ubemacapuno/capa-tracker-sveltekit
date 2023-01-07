@@ -1,5 +1,12 @@
 import type { Actions } from "./$types";
 import { redirect } from "@sveltejs/kit";
+import type { LayoutServerLoad } from './$types';
+
+export const load: LayoutServerLoad = async (event) => {
+  return {
+    session: await event.locals.getSession()
+  };
+}; 
 
 export const actions: Actions = {
 	setTheme: async ({ url, cookies }) => {
