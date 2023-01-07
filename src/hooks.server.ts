@@ -1,14 +1,13 @@
 // import { start_mongo } from "./lib/db";
 import { start_mongo } from "$db"; //using "aliased" version in svelte.config.js
 import { Handle } from "@sveltejs/kit"
+import { SvelteKitAuth } from "@auth/sveltekit"
+import GitHub from "@auth/core/providers/github"
+import { GITHUB_ID, GITHUB_SECRET } from "$env/static/private"
 
-// import { SvelteKitAuth } from "@auth/sveltekit"
-// import GitHub from "@auth/core/providers/github"
-// import { GITHUB_ID, GITHUB_SECRET } from "$env/static/private"
-
-// export const handle = SvelteKitAuth({
-//   providers: [GitHub({ clientId: GITHUB_ID, clientSecret: GITHUB_SECRET })],
-// })
+export const handle = SvelteKitAuth({
+  providers: [GitHub({ clientId: GITHUB_ID, clientSecret: GITHUB_SECRET })],
+})
 
 
 export const themeToggleHandle = (async ({ event, resolve }) => {

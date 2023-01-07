@@ -2,10 +2,14 @@
 //so we want to name this file: page.server.ts
 import type {PageServerLoad} from './$types'
 import { capaReports } from "$capas"
+import { redirect } from '@sveltejs/kit';
+
 
 //"GET" may not be needed for the function to work properly
 //But this is the "GET" request for getting the capaReports from the db:
-export const load: PageServerLoad = async function() {
+export const load: PageServerLoad = async function(event) {
+	const session = await event.locals.getSession();
+  	if (!session?.user) throw redirect(303, '/');
 	const data = await capaReports.find({}, {limit: 500, projection: {
 		capaNumber: 1,
 		capaStatus: 1,
@@ -21,7 +25,8 @@ export const load: PageServerLoad = async function() {
 	// console.log('data', data);
 	console.log('data', JSON.parse(JSON.stringify(data)));
 	return {
-		capaReports: JSON.parse(JSON.stringify(data))
+		capaReports: JSON.parse(JSON.stringify(data)),
+		session: await event.locals.getSession()
 	}
 }
 
