@@ -14,20 +14,24 @@
 
 
 {#if !$page.data.session}
-	<div class="flex flex-col items-center justify-center">
-		<h1 class="text-3xl font-bold">You are not signed in!</h1>
-		<button class="w-20 mt-10 btn btn-primary" on:click={() => signIn("github")}>Login</button>
+	<div class="flex flex-col justify-center">
+		<h1 class="text-3xl text-warning font-bold">Please sign in for complete access!</h1>
+		<p class="mt-5 text-error text-md italic">*NOTE: CAPAtracker is in development! The authentication service may become disconnected, preventing login access!</p>
+		<button class="mt-10 btn btn-primary" on:click={() => signIn("github")}>Login</button>
 	</div>
 
 {:else}
-	<div class="mt-10 max-w-md">
-		<h1 class="text-3xl font-bold"><span class="text-accent">CAPA</span><span class="lowercase text-base-content">Tracker</span> Dashboard</h1>
-		<h3 class="mt-10 text-lg font-bold">Logged in as <span class="text-secondary">{$page.data.session.user?.name ?? "User"}</span></h3>
+	<div class="max-w-md">
+		<h1 class="mb-10 text-3xl font-bold text-accent">Dashboard</h1>
 		
-		<div class="stats stats-vertical lg:stats-horizontal shadow">
+		<div class="bg-base-200 stats stats-vertical">
 			<div class="stat">
 				<div class="stat-title">Total CAPAs</div>
-				<div class="stat-value text-error">{capaReports.length}</div>
+				<div class="stat-value text-primary">{capaReports.length}</div>
+			</div>	
+			<div class="stat">
+				<div class="stat-title">Signed in as</div>
+				<div class="stat-value text-primary">{$page.data.session.user?.name ?? "User"}</div>
 			</div>	
 		</div>
 	</div>
