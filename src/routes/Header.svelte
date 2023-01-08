@@ -21,11 +21,11 @@
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
 				</label>
 				<ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box border-2 border-base-content w-52 bg-neutral">
-					<li><a class="text-accent" href="/about">About</a></li>
 					{#if $page.data.session}
 						<li><a class="text-accent" href="/">Dashboard</a></li>
 					{/if}
-					<li><a class="text-accent" href="/capas">View</a></li>
+					<li><a class="text-accent" href="/capas">CAPAs</a></li>
+					<li><a class="text-accent" href="/about">About</a></li>
 					<li class="self-center">
 						<form method="POST" use:enhance={submitUpdateTheme}>
 							{#if userTheme === "dark"}
@@ -41,8 +41,11 @@
 		</div>
 		<div class="navbar-center hidden sm:flex">
 		  <ul class="menu menu-horizontal p-0">
-			<li><a href="/about">About</a></li>
-			<li><a href="/capas">View</a></li>
+			  {#if $page.data.session}
+			  <li><a href="/">Dashboard</a></li>
+			  {/if}
+			  <li><a href="/capas">CAPAs</a></li>
+			  <li><a href="/about">About</a></li>
 		  </ul>
 		</div>
 		<div class="navbar-end">
@@ -64,9 +67,9 @@
 				<span class="signedInText">
 				<strong class="mx-2 text-accent hidden lg:flex">{$page.data.session.user?.name ?? "User"}</strong>
 				</span>
-				<button class="btn btn-primary" on:click={() => signOut()}>Logout</button>
+				<button class="link link-secondary no-underline" on:click={() => signOut()}>SignOut</button>
 			{:else}
-				<button class="btn btn-primary" on:click={() => signIn("github")}>Login</button>
+				<!-- <button class="btn btn-primary" on:click={() => signIn("github")}>Login</button> -->
 			{/if}
 		</div>
 	</div>
