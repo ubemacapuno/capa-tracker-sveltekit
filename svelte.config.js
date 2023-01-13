@@ -19,8 +19,9 @@ const config = {
 			split: false
 		  }),
 		alias: {
-		  $db: './src/lib/db',
-		  $capas: './src/lib/models/capas'
+		  $db: './src/db',
+		  $capas: './src/lib/models/capas',
+		  $utilities: './src/utilities',
 		}
 	}
 };
