@@ -37,9 +37,15 @@
 		"@auth/core": "^0.2.5",
 		"@auth/sveltekit": "^0.1.12",
 		"cors": "^2.8.5",
+		"deep-rename-keys": "^0.2.1",
+		"deep-replace": "^0.0.8",
 		"daisyui": "^2.42.1",
 		"express": "^4.18.2",
+		"lodash.uniqueid": "^4.0.1",
 		"mongodb": "^4.12.1",
-		"morgan": "^1.10.0"
+		"morgan": "^1.10.0",
+		"omit-deep": "^0.3.0",
+		"zod": "^3.20.2",
+    	"zod-to-json-schema": "^3.20.1"
 	}
 }
