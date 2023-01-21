@@ -6,12 +6,12 @@ import { zodToJsonSchema } from 'zod-to-json-schema'
 export const capas_schema = z.object({
 	_id: z.string(),
 	capaNumber: z.string(),
-	dateCapaCreated: z.string(),
+	dateCapaCreated: z.date(),
     capaStatus: z.string(),
     capaPhase: z.string(),
     problemStatement: z.string(),
-    dateCapaApproved: z.string(),
-    currentPhaseDueDate: z.string(),
+    dateCapaApproved: z.date(),
+    currentPhaseDueDate: z.date(),
     productImpacted:  z.string(),
 })
 
