@@ -6,8 +6,6 @@ import { Capas } from "$db/models/capas/actions"
 import { redirect } from '@sveltejs/kit';
 import { fix_pojo } from '$utilities/fix_pojo';
 
-
-
 export const load = async function (event) {
 	const session = await event.locals.getSession();
   	if (!session?.user) throw redirect(303, '/');
@@ -24,7 +22,8 @@ export const load = async function (event) {
 	}}).toArray();
 
 	return {
-		capas: fix_pojo(all_capas)
+		capas: fix_pojo(all_capas),
+		session: await event.locals.getSession()
 	}
 } satisfies PageServerLoad
 

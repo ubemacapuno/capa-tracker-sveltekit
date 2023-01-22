@@ -6,15 +6,6 @@
   export let data: PageData;
   $: ({capas} = data)
   
-  let capaNumber = ''
-  let dateCapaCreated = ''
-  let capaStatus = ''
-  let capaPhase = ''
-  let problemStatement = ''
-  let dateCapaApproved = ''
-  let currentPhaseDueDate = ''
-  let productImpacted = ''
-  
 </script>
     <h1>Total CAPAs: {capas.length}</h1>
 
