@@ -22,17 +22,41 @@
 
 {:else}
 	<div class="max-w-md">
-		<h1 class="mb-10 text-3xl font-bold text-accent">Dashboard</h1>
+		<h1 class="text-3xl font-bold text-primary">Dashboard</h1>
+		<p>Signed in as {$page.data.session.user?.name ?? "User"}</p>
 		
-		<div class="bg-base-200 stats stats-vertical">
+		<div class="mt-5 bg-base-200 stats stats-vertical">
 			<div class="stat">
 				<div class="stat-title">Total CAPAs</div>
-				<div class="stat-value text-primary">{capaReports.length}</div>
+				<div class="stat-value">{capaReports.length}</div>
 			</div>	
+			<div class="stat text-error">
+				<div class="stat-title">CAPAs Overdue</div>
+				<div class="stat-value">
+					{capaReports
+						.filter(capaReport => new Date(capaReport.currentPhaseDueDate) < new Date())
+						.length
+					}
+				</div>
+			</div>
 			<div class="stat">
-				<div class="stat-title">Signed in as</div>
-				<div class="stat-value text-primary">{$page.data.session.user?.name ?? "User"}</div>
-			</div>	
+				<div class="stat-title">Total CAPAs Open</div>
+				<div class="stat-value">
+					{capaReports
+						.filter(capaReport => capaReport.capaStatus !== "Closed")
+						.length
+					}
+				</div>
+			</div>
+			<div class="stat text-accent">
+				<div class="stat-title">Total CAPAs Closed</div>
+				<div class="stat-value">
+					{capaReports
+						.filter(capaReport => capaReport.capaStatus === "Closed")
+						.length
+					}
+				</div>
+			</div>
 		</div>
 	</div>
 {/if}

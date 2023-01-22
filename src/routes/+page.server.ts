@@ -1,21 +1,11 @@
 import type { Actions } from "./$types";
 import { redirect } from "@sveltejs/kit";
-import { capaReports } from "$capas"
+import { capas } from "$db/models/capas/collection"
 import type { LayoutServerLoad } from './$types';
 import { fix_pojo } from "$utilities/fix_pojo";
 
 export const load: LayoutServerLoad = async (event) => {
-	const data = await capaReports.find({}, {limit: 500, projection: {
-		capaNumber: 1,
-		capaStatus: 1,
-		capaPhase: 1,
-		dateCapaCreated: 1,
-		problemStatement: 1,
-		dateCapaApproved: 1,
-		currentPhaseDueDate: 1,
-		productImpacted: 1,
-
-	}}).toArray();
+	const data = await capas.find({}, { sort: { order: 1 } }).toArray()
 
   return {
 	capaReports: fix_pojo(data),

@@ -9,17 +9,7 @@ import { fix_pojo } from '$utilities/fix_pojo';
 export const load = async function (event) {
 	const session = await event.locals.getSession();
   	if (!session?.user) throw redirect(303, '/');
-	const all_capas = await capas.find({}, {limit: 500, projection: {
-		capaNumber: 1,
-		capaStatus: 1,
-		capaPhase: 1,
-		dateCapaCreated: 1,
-		problemStatement: 1,
-		dateCapaApproved: 1,
-		currentPhaseDueDate: 1,
-		productImpacted: 1,
-
-	}}).toArray();
+	const all_capas = await capas.find({}, { sort: { order: 1 } }).toArray()
 
 	return {
 		capas: fix_pojo(all_capas),
