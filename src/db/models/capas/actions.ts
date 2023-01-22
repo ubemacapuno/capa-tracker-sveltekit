@@ -38,12 +38,9 @@ export const Capas: Actions = {
 
 		// Get the data from the request
 		const data = await get_form_data_object(request)
-		console.log('data', data)
-
 		const updated_path = await capas
 			.findOneAndUpdate({ _id: data._id }, { $set: data }, { returnDocument: 'after' })
 			.catch(log_error)
-		console.log('updated_path', updated_path)
 
 		if (updated_path.ok) return updated_path.value
 	},
