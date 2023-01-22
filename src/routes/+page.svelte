@@ -21,41 +21,45 @@
 	</div>
 
 {:else}
-	<div class="max-w-md">
-		<h1 class="text-3xl font-bold text-primary">Dashboard</h1>
-		<p>Signed in as {$page.data.session.user?.name ?? "User"}</p>
-		
-		<div class="mt-5 bg-base-200 stats stats-vertical">
-			<div class="stat">
-				<div class="stat-title">Total CAPAs</div>
-				<div class="stat-value">{capaReports.length}</div>
-			</div>	
-			<div class="stat text-error">
-				<div class="stat-title">CAPAs Overdue</div>
-				<div class="stat-value">
-					{capaReports
-						.filter(capaReport => new Date(capaReport.currentPhaseDueDate) < new Date())
-						.length
-					}
-				</div>
+
+	<h1 class="text-3xl font-bold text-primary">Dashboard</h1>
+	<p>Signed in as <span class="text-accent">{$page.data.session.user?.name ?? "User"}</span></p>
+	
+	<div class="mt-5 bg-base-200 stats stats-vertical w-full">
+		<div class="stat">
+			<div class="stat-title">Total CAPAs</div>
+			<div class="stat-value">{capaReports.length}</div>
+		</div>	
+		<div class="stat text-error">
+			<div class="stat-title">CAPAs Overdue</div>
+			<div class="stat-value">
+				{capaReports
+					.filter(capaReport => new Date(capaReport.currentPhaseDueDate) < new Date())
+					.length
+
+					-
+					
+				capaReports.
+					filter(capaReport => capaReport.capaStatus === "Closed").length 
+				}
 			</div>
-			<div class="stat">
-				<div class="stat-title">Total CAPAs Open</div>
-				<div class="stat-value">
-					{capaReports
-						.filter(capaReport => capaReport.capaStatus !== "Closed")
-						.length
-					}
-				</div>
+		</div>
+		<div class="stat">
+			<div class="stat-title">Total CAPAs Open</div>
+			<div class="stat-value">
+				{capaReports
+					.filter(capaReport => capaReport.capaStatus !== "Closed")
+					.length
+				}
 			</div>
-			<div class="stat text-accent">
-				<div class="stat-title">Total CAPAs Closed</div>
-				<div class="stat-value">
-					{capaReports
-						.filter(capaReport => capaReport.capaStatus === "Closed")
-						.length
-					}
-				</div>
+		</div>
+		<div class="stat text-accent">
+			<div class="stat-title">Total CAPAs Closed</div>
+			<div class="stat-value">
+				{capaReports
+					.filter(capaReport => capaReport.capaStatus === "Closed")
+					.length
+				}
 			</div>
 		</div>
 	</div>
