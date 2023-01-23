@@ -1,6 +1,5 @@
 <script lang="ts">
   import { enhance } from '$app/forms'
-	import { form_action } from '$lib/forms/enhance'
 	import type { PageData } from './$types'
   import Modal from "$lib/components/Modal.svelte";
 
@@ -27,7 +26,7 @@
 		event.target.reset()
 	}
 </script>
-    <h1 class="text-3xl font-bold">Total CAPAs: <span class="text-accent">{capas.length}</span></h1>
+    <h1 class="text-3xl font-bold">Add and View CAPAs</h1>
 
     <div class="my-4 card w-80 bg-neutral text-primary-content self-center">
       <div class="card-body p-3">
@@ -40,44 +39,44 @@
             on:submit|preventDefault={(e) => (isModalOpen = null, clearFormInput(e))}
           >
           <div>
-            <label for="capaNumber" class="label p-1">
-              <span class="label-text">CAPA Number</span>
+            <label for="capaNumber" class="label p-1 label-text text-primary-content">
+              CAPA Number
             </label>
             <input type="text" name="capaNumber" class="mb-4 input w-full max-w-s" />
           </div>
   
-          <label for="dateCapaCreated" class="label p-1">
-            <span class="label-text">Date Created</span>
+          <label for="dateCapaCreated" class="label p-1 label-text text-primary-content">
+            Date Created
           </label>
           <input type="date" name="dateCapaCreated" class="mb-4 input w-full max-w-s" />
 
-          <label for="capaStatus" class="label p-1">
-            <span class="label-text">Status</span>
+          <label for="capaStatus" class="label p-1 label-text text-primary-content">
+            Status
           </label>
           <input type="text" name="capaStatus" class="mb-4 input w-full max-w-s"/>
 
-          <label for="capaPhase" class="label p-1">
-            <span class="label-text">Phase</span>
+          <label for="capaPhase" class="label p-1 label-text text-primary-content">
+            Phase
           </label>
           <input type="text" name="capaPhase"class="mb-4 input w-full max-w-s"/>
 
-          <label for="problemStatement" class="label p-1">
-            <span class="label-text">Problem Statement</span>
+          <label for="problemStatement" class="label p-1 label-text text-primary-content">
+            Problem Statement
           </label>
           <textarea rows="3" name="problemStatement" class="textarea textarea-bordered mb-4"></textarea>
 
-          <label for="dateCapaApproved" class="label p-1">
-            <span class="label-text">Date Approved</span>
+          <label for="dateCapaApproved" class="label p-1 label-text text-primary-content">
+            Date Approved
           </label>
           <input type="date" name="dateCapaApproved" class="mb-4 input w-full max-w-s"/>
 
-          <label for="currentPhaseDueDate" class="label p-1">
-            <span class="label-text">Phase Due Date</span>
+          <label for="currentPhaseDueDate" class="label p-1 label-text text-primary-content">
+            Phase Due Date
           </label>
           <input type="date" name="currentPhaseDueDate" class="mb-4 input w-full max-w-s" />
 
-          <label for="productImpacted" class="label p-1">
-            <span class="label-text">Product Impacted</span>
+          <label for="productImpacted" class="label p-1 label-text text-primary-content">
+            Product Impacted
           </label>
           <input type="text" name="productImpacted" class="mb-4 input w-full max-w-s"/>
           <button class="btn btn-primary" type="submit">Submit</button>
@@ -90,17 +89,23 @@
     <div class="card-body p-3">
 
       <h3 class="card-title text-accent">{capa.capaNumber}</h3>
-      {#if capa.capaStatus !== "Closed"}
+      {#if capa.capaStatus !== "Closed" && new Date(capa.currentPhaseDueDate) < new Date()}
+        <div class="text-warning">
+          <p class="font-bold">CAPA PAST DUE!</p>
+          <p>Status: {capa.capaStatus}</p>
+          <p>Phase Due Date: {capa.currentPhaseDueDate}</p>
+        </div>
+      {:else if capa.capaStatus !== "Closed"}
         <p>Status: {capa.capaStatus}</p>
         <p>Phase Due Date: {capa.currentPhaseDueDate}</p>
       {:else}
-        <p class="text-primary">{capa.capaStatus}</p>
+        <p class="font-bold">{capa.capaStatus}</p>
       {/if}
 
       <div class="btn-group flex justify-center">
         <button
                   on:click={() => ((isModalOpen = 'add-capa-modal'), (currentCapa = capa))}
-                  type="button" class="btn btn-primary">Edit</button
+                  type="button" class="btn btn-primary">Open</button
                 >
         <form
           method="POST"
@@ -118,13 +123,13 @@
 {/each}
 {#if isModalOpen === 'add-capa-modal'}
   <Modal bind:isModalOpen>
-    <form on:submit|preventDefault={(e) => (isModalOpen = null, clearFormInput(e))} class="flex flex-col" method="POST" action="?/update" use:enhance>
+    <form on:submit|preventDefault={(e) => (isModalOpen = null)} class="flex flex-col" method="POST" action="?/update" use:enhance>
       <div class="flex flex-row mb-1 justify-between">
         <label for="capaNumber" class="label p-1">
           <span class="label-text">Number</span>
         </label>
         <input type="hidden" name={'_id'} value={currentCapa._id} />
-        <input type="text" name="name" class="input w-full max-w-xs" value={currentCapa.capaNumber.trim()} />
+        <input type="text" name="name" class="input w-full max-w-xs" value={currentCapa.capaNumber} />
       </div>
 
       <div class="flex flex-row mb-1 justify-between">
@@ -132,7 +137,7 @@
           <span class="label-text">Status</span>
         </label>
         <input type="hidden" name={'_id'} value={currentCapa._id} />
-        <input type="text" name="capaStatus" class="input w-full max-w-xs"  value={currentCapa.capaStatus.trim()} />
+        <input type="text" name="capaStatus" class="input w-full max-w-xs"  value={currentCapa.capaStatus} />
       </div>
 
       <div class="flex flex-row mb-1 justify-between">
@@ -140,7 +145,7 @@
           <span class="label-text">Phase</span>
         </label>
         <input type="hidden" name={'_id'} value={currentCapa._id} />
-        <input type="text" name="capaPhase" class="input w-full max-w-xs"  value={currentCapa.capaPhase.trim()} />
+        <input type="text" name="capaPhase" class="input w-full max-w-xs"  value={currentCapa.capaPhase} />
       </div>
 
       <div class="flex flex-row mb-1 justify-between">
@@ -172,7 +177,7 @@
           <span class="label-text">Product</span>
         </label>
         <input type="hidden" name={'_id'} value={currentCapa._id} />
-        <input type="text" name="productImpacted" class="input w-full max-w-xs"  value={currentCapa.productImpacted.trim()} />
+        <input type="text" name="productImpacted" class="input w-full max-w-xs"  value={currentCapa.productImpacted} />
       </div>
 
       <div class="flex flex-col mb-1">
@@ -180,7 +185,7 @@
           <span class="label-text">Problem Statement</span>
         </label>
         <input type="hidden" name={'_id'} value={currentCapa._id} />
-        <textarea name="problemStatement" class="input w-full"  value={currentCapa.problemStatement.trim()} />
+        <textarea name="problemStatement" class="input w-full"  value={currentCapa.problemStatement} />
       </div>
 
       <button class="btn btn-primary" type="submit">Update</button>
