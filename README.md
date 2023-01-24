@@ -16,7 +16,7 @@
 
 **Tech used:** 
 
-SvelteKit, TypeScript, MongoDB
+SvelteKit, TypeScript, MongoDB, Auth.js, GitHub OAuth API
 
 ## Install the dependencies either using NPM/Yarn/PNPM:
 
@@ -40,7 +40,7 @@ $ yarn
 $ yarn dev
 ```
 
-Using Yarn:
+Using PNPM:
 
 ```bash
 # Install dependencies
