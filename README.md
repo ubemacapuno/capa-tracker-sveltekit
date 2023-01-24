@@ -6,8 +6,8 @@
 <p>This application is a complete overhaul of my <a href="https://github.com/ubemacapuno/capa-tracker">original CAPA Tracker</a> application, which was developed using Embedded JavaScript (EJS), Node (Express), and MongoDB.</p>
 
  <tr>
-    <td width="50%"  style="align:center;" valign="top">
-            <img src="https://github.com/ubemacapuno/images-for-github-readme/blob/main/2023-01-23%2020-02-22_2.gif?raw=true" width="50%"  alt="CAPA Tracker demo animation."/>
+    <td width="30%"  style="align:center;" valign="top">
+            <img src="https://github.com/ubemacapuno/images-for-github-readme/blob/main/2023-01-23%2020-02-22_2.gif?raw=true" width="30%"  alt="CAPA Tracker demo animation."/>
     </td>
   </tr>
 
