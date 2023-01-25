@@ -1,5 +1,5 @@
 <script>
-	import { sendToast } from '../lib/stores/toast';
+	import { sendToast } from '$lib/stores/toast';
 </script>
 
 <div class="card max-w-screen-lg bg-base-200">

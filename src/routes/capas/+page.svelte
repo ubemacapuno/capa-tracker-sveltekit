@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { PageData } from './$types';
-	import Modal from '../../lib/components/Modal.svelte';
-	import { form_action } from '../../lib/forms/enhance';
+	import Modal from '$lib/components/Modal.svelte';
+	import { form_action } from '$lib/forms/enhance';
 
 	//Variable declaration for the current company
 	//Used to bring up the respective "company" in the edit modal.
