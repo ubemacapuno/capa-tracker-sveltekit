@@ -2,7 +2,7 @@
 
 <p> CAPA Tracker is a full-stack application that allows users to create CAPA records, add information, update information, and delete entries. CAPA stands for Corrective And Preventive Action, and is a process by which a manufacturing organization can make improvements to reduce non-conformances and process gaps.</p>
 <p>My background is in pharmaceutical and medical device quality assurance; in both industries, CAPA processes are required by regulatory agencies. CAPA Tracker is an app that can help document and keep track of your organization's CAPAs.</p>
-<p>CAPA Tracker is in development using <a href="https://kit.svelte.dev/">SvelteKit</a> and <a href="https://daisyui.com/">DaisyUI (Tailwind plugin)</a> on the front-end. Server calls to the MongoDB back-end database are made using <a href="https://kit.svelte.dev/docs/form-actions">SvelteKit form actions</a>. Authentication is handled by <a href="https://authjs.dev/reference/sveltekit/modules/main">Auth.js for SvelteKit</a> (beta version).</p>
+<p>CAPA Tracker is in development using <a href="https://kit.svelte.dev/">SvelteKit</a> and <a href="https://daisyui.com/">DaisyUI (Tailwind plugin)</a> on the front-end. Server calls to the <a href="https://www.mongodb.com/">MongoDB</a> back-end database are made using <a href="https://kit.svelte.dev/docs/form-actions">SvelteKit form actions</a>. Authentication is handled by <a href="https://authjs.dev/reference/sveltekit/modules/main">Auth.js for SvelteKit</a> (beta version).</p>
 <p>This application is a complete overhaul of my <a href="https://github.com/ubemacapuno/capa-tracker">original CAPA Tracker</a> application, which was developed using Embedded JavaScript (EJS), Node (Express), and MongoDB.</p>
 
  <tr>
@@ -16,7 +16,7 @@
 
 **Tech used:** 
 
-SvelteKit, TypeScript, MongoDB, Auth.js, GitHub OAuth API
+<a href="https://kit.svelte.dev/">SvelteKit</a>, <a href="https://www.typescriptlang.org/">TypeScript</a>, <a href="https://www.mongodb.com/">MongoDB</a>, <a href="https://authjs.dev/reference/sveltekit/modules/main">Auth.js</a>, <a href="https://docs.github.com/en">GitHub OAuth API</a>, <a href="https://tailwindcss.com/">Tailwind CSS</a>, <a href="https://daisyui.com/">DaisyUI</a>.
 
 ## Install the dependencies either using NPM/Yarn/PNPM:
 
