@@ -56,10 +56,23 @@
 			<input type="date" name="dateCapaCreated" class="mb-4 input w-full max-w-s" />
 
 			<label for="capaStatus" class="label p-1 label-text text-primary-content"> Status </label>
-			<input type="text" name="capaStatus" class="mb-4 input w-full max-w-s" />
+			<select class="select w-full max-w-xs" name="capaStatus" id="capaStatus">
+				<option value="Pending">Pending</option>
+				<option value="Approved">Approved</option>
+				<option value="Rejected">Rejected</option>
+				<option value="Closed">Closed</option>
+			</select>
 
 			<label for="capaPhase" class="label p-1 label-text text-primary-content"> Phase </label>
-			<input type="text" name="capaPhase" class="mb-4 input w-full max-w-s" />
+			<select class="select w-full max-w-xs" name="capaPhase" id="capaStatus">
+				<option value="Initiation">Initiation</option>
+				<option value="Risk Assessment">Risk Assessment</option>
+				<option value="Containment & Correction">Containment & Correction</option>
+				<option value="C/P Actions">C/P Actions</option>
+				<option value="Implementation">Implementation</option>
+				<option value="VOE">VOE</option>
+				<option value="Closure">Closure</option>
+			</select>
 
 			<label for="problemStatement" class="label p-1 label-text text-primary-content">
 				Problem Statement
