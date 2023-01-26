@@ -93,6 +93,7 @@
 				Product Impacted
 			</label>
 			<input type="text" name="productImpacted" class="mb-4 input w-full max-w-s" />
+			<input type="hidden" name="documentCreated" value={new Date(Date.now()).toLocaleString()} />
 			<button class="btn btn-primary" type="submit">Submit</button>
 		</form>
 	</div>
