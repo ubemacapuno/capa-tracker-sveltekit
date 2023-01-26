@@ -1,15 +1,18 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { invalidateAll } from '$app/navigation';
 	import type { PageData } from './$types';
 	import Modal from '$lib/components/Modal.svelte';
 	import { form_action } from '$lib/forms/enhance';
 
-	//Variable declaration for the current company
-	//Used to bring up the respective "company" in the edit modal.
-
 	export let data: PageData;
 	$: ({ capas } = data);
 	let isModalOpen: 'add-capa-modal' | null | false = null;
+	// let isCreateModalOpen = false; //TODO: Update UI to maybe have a modal for this
+	let isEditModalOpen = false;
+
+	//Variable declaration for the current company
+	//Used to bring up the respective "company" in the edit modal.
 	let currentCapa = {
 		_id: '',
 		capaNumber: '',
@@ -36,7 +39,7 @@
 		<form
 			method="POST"
 			action="?/create"
-			use:enhance
+			use:enhance={form_action({ message: 'CAPA creation' }, async (res) => await invalidateAll())}
 			class="flex flex-col align-center gap-1 p-2"
 			on:submit|preventDefault={(e) => ((isModalOpen = null), clearFormInput(e))}
 		>
@@ -100,11 +103,18 @@
 
 			<div class="btn-group flex justify-center">
 				<button
-					on:click={() => ((isModalOpen = 'add-capa-modal'), (currentCapa = capa))}
+					on:click={() => ((isEditModalOpen = true), (currentCapa = capa))}
 					type="button"
 					class="btn btn-primary">Open</button
 				>
-				<form method="POST" action="?/delete" use:enhance>
+				<form
+					method="POST"
+					action="?/delete"
+					use:enhance={form_action(
+						{ message: 'CAPA deletion' },
+						async (res) => await invalidateAll()
+					)}
+				>
 					<input type="hidden" name="_id" value={capa._id} />
 					<button class="btn btn-error" type="submit">Delete</button>
 				</form>
@@ -114,14 +124,16 @@
 {:else}
 	<p>No Capas Found</p>
 {/each}
-{#if isModalOpen === 'add-capa-modal'}
-	<Modal bind:isModalOpen>
+
+<Modal bind:isModalOpen={isEditModalOpen}>
+	{#if isEditModalOpen}
 		<form
-			on:submit|preventDefault={(e) => (isModalOpen = null)}
 			class="flex flex-col"
 			method="POST"
 			action="?/update"
-			use:enhance
+			use:enhance={form_action({ message: 'CAPA Update' }, async () => {
+				await invalidateAll(), (isEditModalOpen = false);
+			})}
 		>
 			<div class="flex flex-row mb-1 justify-between">
 				<label for="capaNumber" class="label p-1">
@@ -228,5 +240,5 @@
 
 			<button class="btn btn-primary" type="submit">Update</button>
 		</form>
-	</Modal>
-{/if}
+	{/if}
+</Modal>
