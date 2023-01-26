@@ -11,8 +11,8 @@
 	// let isCreateModalOpen = false; //TODO: Update UI to maybe have a modal for this
 	let isEditModalOpen = false;
 
-	//Variable declaration for the current company
-	//Used to bring up the respective "company" in the edit modal.
+	//Variable declaration for the current capa
+	//Used to bring up the respective "capa" in the edit modal.
 	let currentCapa = {
 		_id: '',
 		capaNumber: '',

@@ -13,31 +13,19 @@ import {
 } from './schema';
 import { capas } from './collection';
 
+// TODO: Finish setting up validation so that we don't show success on empty form submissions
 export const Capas: Actions = {
-	// TODO: Find a way to re-load capa list on creation (currently working but does not refresh list of capas)
 	create: async function ({ locals, request }) {
 		// Check if user has the ability to edit this capa
 		// if (!has_role(locals, 'admin')) return fail(401)
 
 		const data = await get_form_data_object(request);
-		const insert_data = prepare_data_for_insert<Capa>(data);
-		//zod safeParse
-		const parse_data = capas_schema.safeParse(insert_data);
-
-		//Return error message if object doesn't pass the schema
-		if (!parse_data.success) {
-			// Loop through the errors array and create a custom errors array
-			const errors = parse_data.error.errors.map((error) => {
-				return {
-					field: error.path[0],
-					message: error.message
-				};
-			});
-
-			return fail(400, { error: true, errors });
-		}
+		console.log('data', data);
+		const insert_data = prepare_data_for_insert<Capa>(data, data.name);
+		console.log('insert_data', insert_data);
 
 		const created_path = await capas.insertOne(insert_data).catch(log_error);
+		console.log('created_path', created_path);
 
 		return {
 			id: created_path.insertedId
