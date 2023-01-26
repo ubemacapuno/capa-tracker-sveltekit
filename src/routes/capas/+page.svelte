@@ -22,7 +22,8 @@
 		problemStatement: '',
 		dateCapaApproved: '',
 		currentPhaseDueDate: '',
-		productImpacted: ''
+		productImpacted: '',
+		documentCreated: ''
 	};
 
 	//Function for resetting form input after submission
@@ -252,7 +253,10 @@
 				/>
 			</div>
 
-			<button class="btn btn-primary" type="submit">Update</button>
+			<button class="mt-2 btn btn-primary" type="submit">Update</button>
+			<span class="self-center py-2 text-primary"
+				>Initially made on {currentCapa.documentCreated}</span
+			>
 		</form>
 	{/if}
 </Modal>
