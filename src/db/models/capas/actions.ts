@@ -21,8 +21,22 @@ export const Capas: Actions = {
 
 		const data = await get_form_data_object(request);
 		console.log('data', data);
-		const insert_data = prepare_data_for_insert<Capa>(data, data.name);
+
+		const insert_data = prepare_data_for_insert<Capa>(data);
 		console.log('insert_data', insert_data);
+		const parse_data = capas_schema.safeParse(insert_data);
+
+		if (!parse_data.success) {
+			// Loop through the errors array and create a custom errors array
+			const errors = parse_data.error.errors.map((error) => {
+				return {
+					field: error.path[0],
+					message: error.message
+				};
+			});
+			console.log(errors);
+			return fail(400, { error: true, errors });
+		}
 
 		const created_path = await capas.insertOne(insert_data).catch(log_error);
 		console.log('created_path', created_path);
