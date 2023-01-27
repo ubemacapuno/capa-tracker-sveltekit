@@ -11,6 +11,7 @@
 	// let isCreateModalOpen = false; //TODO: Update UI to maybe have a modal for this
 	let isEditModalOpen = false;
 
+	
 	//Variable declaration for the current capa
 	//Used to bring up the respective "capa" in the edit modal.
 	let currentCapa = {
@@ -26,6 +27,50 @@
 		documentCreated: ''
 	};
 
+	//Filter types
+	let filter: 'all' | 'open' | 'closed' | 'late' = 'all'
+	let allSelected = "selected-filter"
+	let openSelected = ""
+	let closedSelected = ""
+	let lateSelected = ""
+
+	let tabSelected = (filter: string) =>{
+		if(filter === "all"){
+			openSelected = ""
+			closedSelected = ""
+			allSelected = "selected-filter"
+			lateSelected = ""
+		}else if(filter === "closed"){ 
+			allSelected = ""
+			openSelected = ""
+			closedSelected = "selected-filter"
+			lateSelected = ""
+		}else if(filter === "open"){
+			allSelected = ""
+			closedSelected = ""
+			openSelected = "selected-filter"
+			lateSelected = ""
+		}else if(filter === "late"){
+			allSelected = ""
+			closedSelected = ""
+			openSelected = ""
+			lateSelected = "selected-filter"
+		}
+	}
+	
+	//Reactive filter
+	$: filteredCapas = capas.filter((capa) => {
+		if (filter === 'open'){
+			return capa.capaStatus !== "Closed" && capa.capaStatus !== "Rejected"
+		}
+		if (filter === 'closed'){
+			return capa.capaStatus === "Closed"
+		}
+		if (filter === 'late'){
+			return new Date(capa.currentPhaseDueDate) < new Date()
+		}
+		return true
+	})
 	//Function for resetting form input after submission
 	const clearFormInput = async (event) => {
 		event.target.reset();
@@ -99,7 +144,23 @@
 		</form>
 	</div>
 </div>
-{#each capas as capa}
+
+	<ul class="flex justify-evenly">
+		<li>
+			<button id={allSelected} on:click={() => (filter = 'all', tabSelected(filter))}>All</button>
+		</li>
+		<li>
+			<button id={openSelected} on:click={() => (filter = 'open', tabSelected(filter))}>Open</button>
+		</li>
+		<li>
+			<button id={lateSelected} on:click={() => (filter = 'late', tabSelected(filter))}>Late</button>
+		</li>
+		<li>
+			<button id={closedSelected} on:click={() => (filter = 'closed', tabSelected(filter))}>Closed</button>
+		</li>
+	</ul>
+
+{#each filteredCapas as capa}
 	<div class="my-4 card w-80 bg-neutral text-primary-content self-center">
 		<div class="card-body p-3">
 			<h3 class="card-title text-accent">{capa.capaNumber}</h3>
@@ -137,7 +198,9 @@
 		</div>
 	</div>
 {:else}
-	<p>No Capas Found</p>
+<div class="flex justify-center">
+	<p class="my-4 text-accent font-bold">No Capas Found</p>
+</div>
 {/each}
 
 <Modal bind:isModalOpen={isEditModalOpen}>
@@ -260,3 +323,10 @@
 		</form>
 	{/if}
 </Modal>
+<style>
+	#selected-filter{
+		color: #1FB2A6;
+		text-decoration: underline;
+		font-weight: bold;
+	}
+</style>
