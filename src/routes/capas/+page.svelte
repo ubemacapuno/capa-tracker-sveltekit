@@ -67,7 +67,7 @@
 			return capa.capaStatus === "Closed"
 		}
 		if (filter === 'late'){
-			return new Date(capa.currentPhaseDueDate) < new Date()
+			return new Date(capa.currentPhaseDueDate) < new Date() && capa.capaStatus !== "Closed" && capa.capaStatus !== "Rejected"
 		}
 		return true
 	})
