@@ -11,7 +11,6 @@
 	// let isCreateModalOpen = false; //TODO: Update UI to maybe have a modal for this
 	let isEditModalOpen = false;
 
-	
 	//Variable declaration for the current capa
 	//Used to bring up the respective "capa" in the edit modal.
 	let currentCapa = {
@@ -27,50 +26,66 @@
 		documentCreated: ''
 	};
 
-	//Filter types
-	let filter: 'all' | 'open' | 'closed' | 'late' = 'all'
-	let allSelected = "selected-filter"
-	let openSelected = ""
-	let closedSelected = ""
-	let lateSelected = ""
+	//Variables for the dropdown selections:
+	let capaStatusOptions = ['Pending', 'Approved', 'Rejected', 'Closed'];
+	let capaPhaseOptions = [
+		'Initiation',
+		'Risk Assessment',
+		'Containment & Correction',
+		'C/P Actions',
+		'Implementation',
+		'VOE',
+		'Closure'
+	];
 
-	let tabSelected = (filter: string) =>{
-		if(filter === "all"){
-			openSelected = ""
-			closedSelected = ""
-			allSelected = "selected-filter"
-			lateSelected = ""
-		}else if(filter === "closed"){ 
-			allSelected = ""
-			openSelected = ""
-			closedSelected = "selected-filter"
-			lateSelected = ""
-		}else if(filter === "open"){
-			allSelected = ""
-			closedSelected = ""
-			openSelected = "selected-filter"
-			lateSelected = ""
-		}else if(filter === "late"){
-			allSelected = ""
-			closedSelected = ""
-			openSelected = ""
-			lateSelected = "selected-filter"
+	//Filter types
+	let filter: 'all' | 'open' | 'closed' | 'late' = 'all';
+	let allSelected = 'selected-filter';
+	let openSelected = '';
+	let closedSelected = '';
+	let lateSelected = '';
+
+	let tabSelected = (filter: string) => {
+		if (filter === 'all') {
+			openSelected = '';
+			closedSelected = '';
+			allSelected = 'selected-filter';
+			lateSelected = '';
+		} else if (filter === 'closed') {
+			allSelected = '';
+			openSelected = '';
+			closedSelected = 'selected-filter';
+			lateSelected = '';
+		} else if (filter === 'open') {
+			allSelected = '';
+			closedSelected = '';
+			openSelected = 'selected-filter';
+			lateSelected = '';
+		} else if (filter === 'late') {
+			allSelected = '';
+			closedSelected = '';
+			openSelected = '';
+			lateSelected = 'selected-filter';
 		}
-	}
-	
+	};
+
 	//Reactive filter
 	$: filteredCapas = capas.filter((capa) => {
-		if (filter === 'open'){
-			return capa.capaStatus !== "Closed" && capa.capaStatus !== "Rejected"
+		if (filter === 'open') {
+			return capa.capaStatus !== 'Closed' && capa.capaStatus !== 'Rejected';
 		}
-		if (filter === 'closed'){
-			return capa.capaStatus === "Closed"
+		if (filter === 'closed') {
+			return capa.capaStatus === 'Closed';
 		}
-		if (filter === 'late'){
-			return new Date(capa.currentPhaseDueDate) < new Date() && capa.capaStatus !== "Closed" && capa.capaStatus !== "Rejected"
+		if (filter === 'late') {
+			return (
+				new Date(capa.currentPhaseDueDate) < new Date() &&
+				capa.capaStatus !== 'Closed' &&
+				capa.capaStatus !== 'Rejected'
+			);
 		}
-		return true
-	})
+		return true;
+	});
 	//Function for resetting form input after submission
 	const clearFormInput = async (event) => {
 		event.target.reset();
@@ -103,21 +118,16 @@
 
 			<label for="capaStatus" class="label p-1 label-text text-primary-content"> Status </label>
 			<select class="select w-full max-w-xs" name="capaStatus" id="capaStatus">
-				<option value="Pending">Pending</option>
-				<option value="Approved">Approved</option>
-				<option value="Rejected">Rejected</option>
-				<option value="Closed">Closed</option>
+				{#each capaStatusOptions as option}
+					<option value={option}>{option}</option>
+				{/each}
 			</select>
 
 			<label for="capaPhase" class="label p-1 label-text text-primary-content"> Phase </label>
 			<select class="select w-full max-w-xs" name="capaPhase" id="capaStatus">
-				<option value="Initiation">Initiation</option>
-				<option value="Risk Assessment">Risk Assessment</option>
-				<option value="Containment & Correction">Containment & Correction</option>
-				<option value="C/P Actions">C/P Actions</option>
-				<option value="Implementation">Implementation</option>
-				<option value="VOE">VOE</option>
-				<option value="Closure">Closure</option>
+				{#each capaPhaseOptions as option}
+					<option value={option}>{option}</option>
+				{/each}
 			</select>
 
 			<label for="problemStatement" class="label p-1 label-text text-primary-content">
@@ -145,20 +155,24 @@
 	</div>
 </div>
 
-	<ul class="flex justify-evenly">
-		<li>
-			<button id={allSelected} on:click={() => (filter = 'all', tabSelected(filter))}>All</button>
-		</li>
-		<li>
-			<button id={openSelected} on:click={() => (filter = 'open', tabSelected(filter))}>Open</button>
-		</li>
-		<li>
-			<button id={lateSelected} on:click={() => (filter = 'late', tabSelected(filter))}>Late</button>
-		</li>
-		<li>
-			<button id={closedSelected} on:click={() => (filter = 'closed', tabSelected(filter))}>Closed</button>
-		</li>
-	</ul>
+<ul class="flex justify-evenly">
+	<li>
+		<button id={allSelected} on:click={() => ((filter = 'all'), tabSelected(filter))}>All</button>
+	</li>
+	<li>
+		<button id={openSelected} on:click={() => ((filter = 'open'), tabSelected(filter))}>Open</button
+		>
+	</li>
+	<li>
+		<button id={lateSelected} on:click={() => ((filter = 'late'), tabSelected(filter))}>Late</button
+		>
+	</li>
+	<li>
+		<button id={closedSelected} on:click={() => ((filter = 'closed'), tabSelected(filter))}
+			>Closed</button
+		>
+	</li>
+</ul>
 
 {#each filteredCapas as capa}
 	<div class="my-4 card w-80 bg-neutral text-primary-content self-center">
@@ -198,9 +212,9 @@
 		</div>
 	</div>
 {:else}
-<div class="flex justify-center">
-	<p class="my-4 text-accent font-bold">No Capas Found</p>
-</div>
+	<div class="flex justify-center">
+		<p class="my-4 text-accent font-bold">No Capas Found</p>
+	</div>
 {/each}
 
 <Modal bind:isModalOpen={isEditModalOpen}>
@@ -231,12 +245,16 @@
 					<span class="label-text">Status</span>
 				</label>
 				<input type="hidden" name={'_id'} value={currentCapa._id} />
-				<input
-					type="text"
+				<select
+					class="select w-full max-w-xs"
 					name="capaStatus"
-					class="input w-full max-w-xs"
-					value={currentCapa.capaStatus}
-				/>
+					id="capaStatus"
+					bind:value={currentCapa.capaStatus}
+				>
+					{#each capaStatusOptions as option}
+						<option value={option}>{option}</option>
+					{/each}
+				</select>
 			</div>
 
 			<div class="flex flex-row mb-1 justify-between">
@@ -244,12 +262,16 @@
 					<span class="label-text">Phase</span>
 				</label>
 				<input type="hidden" name={'_id'} value={currentCapa._id} />
-				<input
-					type="text"
+				<select
+					class="select w-full max-w-xs"
 					name="capaPhase"
-					class="input w-full max-w-xs"
-					value={currentCapa.capaPhase}
-				/>
+					id="capaPhase"
+					bind:value={currentCapa.capaPhase}
+				>
+					{#each capaPhaseOptions as option}
+						<option value={option}>{option}</option>
+					{/each}
+				</select>
 			</div>
 
 			<div class="flex flex-row mb-1 justify-between">
@@ -323,9 +345,10 @@
 		</form>
 	{/if}
 </Modal>
+
 <style>
-	#selected-filter{
-		color: #1FB2A6;
+	#selected-filter {
+		color: #1fb2a6;
 		text-decoration: underline;
 		font-weight: bold;
 	}
