@@ -63,4 +63,7 @@
 			<div class="stat-value">{capaReports.length}</div>
 		</div>	
 	</div>
+	<div class="max-w-md">
+		<a href="/capas" class="my-6 btn btn-primary">View CAPAs</a>
+	</div>
 {/if}

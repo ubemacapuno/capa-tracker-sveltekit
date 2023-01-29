@@ -176,18 +176,26 @@
 		{#each filteredCapas as capa}
 			<div class="my-4 card w-80 bg-neutral text-primary-content self-center">
 				<div class="card-body p-3">
-					<h3 class="card-title text-accent">{capa.capaNumber}</h3>
 					{#if capa.capaStatus !== 'Closed' && capa.capaStatus !== 'Rejected' && new Date(capa.currentPhaseDueDate) < new Date()}
 						<div class="text-warning">
-							<p class="font-bold">CAPA PAST DUE!</p>
-							<p>Status: {capa.capaStatus}</p>
+							<h3 class="card-title">⚠️ {capa.capaNumber} PAST DUE!</h3>
+							<p>{capa.capaStatus}</p>
 							<p>Phase Due Date: {capa.currentPhaseDueDate}</p>
 						</div>
+					{:else if capa.capaStatus === 'Rejected'}
+						<div class="text-error">
+							<h3 class="card-title">⛔ {capa.capaNumber}</h3>
+							<p>{capa.capaStatus}. No Action Needed.</p>
+						</div>
 					{:else if capa.capaStatus !== 'Closed'}
-						<p>Status: {capa.capaStatus}</p>
+						<h3 class="card-title">{capa.capaNumber}</h3>
+						<p>{capa.capaStatus}</p>
 						<p>Phase Due Date: {capa.currentPhaseDueDate}</p>
 					{:else}
-						<p class="font-bold text-accent">✅ {capa.capaStatus}</p>
+						<div class="text-accent">
+							<h3 class="card-title">✅ {capa.capaNumber}</h3>
+							<p>{capa.capaStatus}. No Action Needed.</p>
+						</div>
 					{/if}
 		
 					<div class="btn-group flex justify-center">
@@ -210,16 +218,19 @@
 					</div>
 				</div>
 			</div>
-		{:else}
+			{:else}
 			<div class="flex justify-center">
 				<p class="my-4 text-accent font-bold">No Capas Found</p>
 			</div>
-		{/each}
+			{/each}
+		</div>
 	</div>
-</div>
-
-<Modal bind:isModalOpen={isEditModalOpen}>
-	{#if isEditModalOpen}
+	
+	<Modal bind:isModalOpen={isEditModalOpen}>
+		{#if isEditModalOpen}
+		<span class="self-center py-2 text-accent"
+			>Added on {currentCapa.documentCreated}</span
+		>
 		<form
 			class="flex flex-col"
 			method="POST"
@@ -247,7 +258,7 @@
 				</label>
 				<input type="hidden" name={'_id'} value={currentCapa._id} />
 				<select
-					class="select w-full max-w-xs"
+					class="modal-select select max-w-xs"
 					name="capaStatus"
 					id="capaStatus"
 					bind:value={currentCapa.capaStatus}
@@ -264,7 +275,7 @@
 				</label>
 				<input type="hidden" name={'_id'} value={currentCapa._id} />
 				<select
-					class="select w-full max-w-xs"
+					class="modal-select select max-w-xs p-2"
 					name="capaPhase"
 					id="capaPhase"
 					bind:value={currentCapa.capaPhase}
@@ -340,36 +351,38 @@
 			</div>
 
 			<button class="mt-2 btn btn-primary" type="submit">Update</button>
-			<span class="self-center py-2 text-primary"
-				>Initially made on {currentCapa.documentCreated}</span
-			>
 		</form>
 	{/if}
 </Modal>
 
 <style>
+
 	#selected-filter {
 		color: #1fb2a6;
 		text-decoration: underline;
 		font-weight: bold;
 	}
-
+	
 	.flex-container {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
 	@media (min-width: 768px) {
 		/* CSS rules to apply when screen width is 768 pixels or higher */
 		.flex-container {
 			display: flex;
 			flex-direction: row;
 		}
-	  
+		
+		.modal-select {
+			width: 100%;
+		}
 		.capa-cards, .add-capas {
 			margin: 1rem;
 			align-self: flex-start;
 		}
+
 }
 </style>
