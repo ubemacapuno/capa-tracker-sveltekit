@@ -16,7 +16,7 @@
 {#if !$page.data.session}
 	<div class="flex flex-col justify-center">
 		<h1 class="text-3xl text-warning font-bold">Please sign in for complete access!</h1>
-		<p class="mt-5 text-error text-md italic">*NOTE: CAPAtracker is in development! The authentication service may become disconnected, preventing login access!</p>
+		<p class="mt-5 text-error text-md italic">*NOTE: CAPA Tracker is under construction and authentication may become disconnected from production, preventing login access!*</p>
 		<button class="mt-10 btn btn-primary" on:click={() => signIn("github")}>Login</button>
 	</div>
 
