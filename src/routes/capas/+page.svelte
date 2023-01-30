@@ -154,24 +154,16 @@
 	</div>
 	
 	<div class="capa-cards">
-		<ul class="flex justify-evenly">
-			<li>
-				<button id={allSelected} on:click={() => ((filter = 'all'), tabSelected(filter))}>All</button>
-			</li>
-			<li>
-				<button id={openSelected} on:click={() => ((filter = 'open'), tabSelected(filter))}>Open</button
-				>
-			</li>
-			<li>
-				<button id={lateSelected} on:click={() => ((filter = 'late'), tabSelected(filter))}>Late</button
-				>
-			</li>
-			<li>
-				<button id={closedSelected} on:click={() => ((filter = 'closed'), tabSelected(filter))}
-					>Closed</button
-				>
-			</li>
-		</ul>
+		<div  id="filter-group">
+			<button class="btn btn-xl" id={allSelected} on:click={() => ((filter = 'all'), tabSelected(filter))}>All</button>
+			<button class="btn btn-xl" id={openSelected} on:click={() => ((filter = 'open'), tabSelected(filter))}>Open</button
+			>
+			<button class="btn btn-xl" id={lateSelected} on:click={() => ((filter = 'late'), tabSelected(filter))}>Late</button
+			>
+			<button class="btn btn-2xl" id={closedSelected} on:click={() => ((filter = 'closed'), tabSelected(filter))}
+				>Closed</button
+			>
+		</div>
 		
 		{#each filteredCapas as capa}
 			<div class="my-4 card w-80 bg-neutral text-primary-content self-center">
@@ -367,6 +359,14 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+
+	#filter-group {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		background-color: #191D24;
+		border-radius: 1rem;
 	}
 	
 	@media (min-width: 768px) {
