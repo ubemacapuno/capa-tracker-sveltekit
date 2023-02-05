@@ -98,9 +98,12 @@
 			<form
 				method="POST"
 				action="?/create"
-				use:enhance={form_action({ message: 'CAPA creation' }, async (res) => await invalidateAll())}
+				use:enhance={form_action(
+					{ message: 'CAPA creation' },
+					async (res) => await invalidateAll()
+				)}
 				class="flex flex-col align-center gap-1 p-2"
-				on:submit|preventDefault={(e) => ((isModalOpen = null), clearFormInput(e))}
+				on:submit|preventDefault={(e) => clearFormInput(e)}
 			>
 				<div>
 					<label for="capaNumber" class="label p-1 label-text text-primary-content">
@@ -108,41 +111,41 @@
 					</label>
 					<input type="text" name="capaNumber" class="mb-4 input w-full max-w-s" />
 				</div>
-	
+
 				<label for="dateCapaCreated" class="label p-1 label-text text-primary-content">
 					Date Created
 				</label>
 				<input type="date" name="dateCapaCreated" class="mb-4 input w-full max-w-s" />
-	
+
 				<label for="capaStatus" class="label p-1 label-text text-primary-content"> Status </label>
 				<select class="select w-full max-w-xs" name="capaStatus" id="capaStatus">
 					{#each capaStatusOptions as option}
 						<option value={option}>{option}</option>
 					{/each}
 				</select>
-	
+
 				<label for="capaPhase" class="label p-1 label-text text-primary-content"> Phase </label>
 				<select class="select w-full max-w-xs" name="capaPhase" id="capaStatus">
 					{#each capaPhaseOptions as option}
 						<option value={option}>{option}</option>
 					{/each}
 				</select>
-	
+
 				<label for="problemStatement" class="label p-1 label-text text-primary-content">
 					Problem Statement
 				</label>
 				<textarea rows="3" name="problemStatement" class="textarea textarea-bordered mb-4" />
-	
+
 				<label for="dateCapaApproved" class="label p-1 label-text text-primary-content">
 					Date Approved
 				</label>
 				<input type="date" name="dateCapaApproved" class="mb-4 input w-full max-w-s" />
-	
+
 				<label for="currentPhaseDueDate" class="label p-1 label-text text-primary-content">
 					Phase Due Date
 				</label>
 				<input type="date" name="currentPhaseDueDate" class="mb-4 input w-full max-w-s" />
-	
+
 				<label for="productImpacted" class="label p-1 label-text text-primary-content">
 					Product Impacted
 				</label>
@@ -152,19 +155,31 @@
 			</form>
 		</div>
 	</div>
-	
+
 	<div class="capa-cards">
-		<div  id="filter-group">
-			<button class="btn btn-xl" id={allSelected} on:click={() => ((filter = 'all'), tabSelected(filter))}>All</button>
-			<button class="btn btn-xl" id={openSelected} on:click={() => ((filter = 'open'), tabSelected(filter))}>Open</button
+		<div id="filter-group">
+			<button
+				class="btn btn-xl"
+				id={allSelected}
+				on:click={() => ((filter = 'all'), tabSelected(filter))}>All</button
 			>
-			<button class="btn btn-xl" id={lateSelected} on:click={() => ((filter = 'late'), tabSelected(filter))}>Late</button
+			<button
+				class="btn btn-xl"
+				id={openSelected}
+				on:click={() => ((filter = 'open'), tabSelected(filter))}>Open</button
 			>
-			<button class="btn btn-2xl" id={closedSelected} on:click={() => ((filter = 'closed'), tabSelected(filter))}
-				>Closed</button
+			<button
+				class="btn btn-xl"
+				id={lateSelected}
+				on:click={() => ((filter = 'late'), tabSelected(filter))}>Late</button
+			>
+			<button
+				class="btn btn-2xl"
+				id={closedSelected}
+				on:click={() => ((filter = 'closed'), tabSelected(filter))}>Closed</button
 			>
 		</div>
-		
+
 		{#each filteredCapas as capa}
 			<div class="my-4 card w-80 bg-neutral text-primary-content self-center">
 				<div class="card-body p-3">
@@ -189,7 +204,7 @@
 							<p>{capa.capaStatus}. No Action Needed.</p>
 						</div>
 					{/if}
-		
+
 					<div class="btn-group flex justify-center">
 						<button
 							on:click={() => ((isEditModalOpen = true), (currentCapa = capa))}
@@ -210,19 +225,17 @@
 					</div>
 				</div>
 			</div>
-			{:else}
+		{:else}
 			<div class="flex justify-center">
 				<p class="my-4 text-accent font-bold">No Capas Found</p>
 			</div>
-			{/each}
-		</div>
+		{/each}
 	</div>
-	
-	<Modal bind:isModalOpen={isEditModalOpen}>
-		{#if isEditModalOpen}
-		<span class="self-center py-2 text-accent"
-			>Added on {currentCapa.documentCreated}</span
-		>
+</div>
+
+<Modal bind:isModalOpen={isEditModalOpen}>
+	{#if isEditModalOpen}
+		<span class="self-center py-2 text-accent">Added on {currentCapa.documentCreated}</span>
 		<form
 			class="flex flex-col"
 			method="POST"
@@ -348,13 +361,12 @@
 </Modal>
 
 <style>
-
 	#selected-filter {
 		color: #1fb2a6;
 		text-decoration: underline;
 		font-weight: bold;
 	}
-	
+
 	.flex-container {
 		display: flex;
 		flex-direction: column;
@@ -365,24 +377,24 @@
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
-		background-color: #191D24;
+		background-color: #191d24;
 		border-radius: 1rem;
 	}
-	
+
 	@media (min-width: 768px) {
 		/* CSS rules to apply when screen width is 768 pixels or higher */
 		.flex-container {
 			display: flex;
 			flex-direction: row;
 		}
-		
+
 		.modal-select {
 			width: 100%;
 		}
-		.capa-cards, .add-capas {
+		.capa-cards,
+		.add-capas {
 			margin: 1rem;
 			align-self: flex-start;
 		}
-
-}
+	}
 </style>
