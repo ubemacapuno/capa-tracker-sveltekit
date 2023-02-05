@@ -39,9 +39,11 @@
 					{#if $page.data.session}
 						<li><a class="text-accent" href="/">Dashboard</a></li>
 						<li><a class="text-accent" href="/capas">CAPAs</a></li>
+						<li><a class="text-accent" href="/about">About</a></li>
+					{:else}
+						<li><a class="text-accent" href="/">Home</a></li>
+						<li><a class="text-accent" href="/about">About</a></li>
 					{/if}
-					<li><a class="text-accent" href="/">Home</a></li>
-					<li><a class="text-accent" href="/about">About</a></li>
 					<li class="self-center">
 						<form method="POST" use:enhance={submitUpdateTheme}>
 							{#if userTheme === 'dark'}
@@ -71,11 +73,13 @@
 		<div class="navbar-center hidden sm:flex">
 			<ul class="menu menu-horizontal p-0">
 				{#if $page.data.session}
-					<li><a href="/">Dashboard</a></li>
-					<li><a href="/capas">CAPAs</a></li>
+					<li><a class="text-accent" href="/">Dashboard</a></li>
+					<li><a class="text-accent" href="/capas">CAPAs</a></li>
+					<li><a class="text-accent" href="/about">About</a></li>
+				{:else}
+					<li><a class="text-accent" href="/">Home</a></li>
+					<li><a class="text-accent" href="/about">About</a></li>
 				{/if}
-				<li><a href="/">Home</a></li>
-				<li><a href="/about">About</a></li>
 			</ul>
 		</div>
 		<div class="navbar-end">
