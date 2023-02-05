@@ -29,7 +29,9 @@
 		<div class="stat">
 			<div class="stat-title">Total CAPAs Open</div>
 			<div class="stat-value">
-				{capaReports.filter((capaReport) => capaReport.capaStatus !== 'Closed').length}
+				{capaReports.filter(
+					(capaReport) => capaReport.capaStatus !== 'Closed' && capaReport.capaStatus !== 'Rejected'
+				).length}
 			</div>
 		</div>
 		<div class="stat text-error">
