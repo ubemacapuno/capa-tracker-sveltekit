@@ -35,8 +35,11 @@
 		<div class="stat text-error">
 			<div class="stat-title">CAPAs Overdue</div>
 			<div class="stat-value">
-				{capaReports.filter((capaReport) => new Date(capaReport.currentPhaseDueDate) < new Date())
-					.length}
+				{capaReports.filter(
+					(capaReport) =>
+						new Date(capaReport.currentPhaseDueDate) < new Date() &&
+						capaReport.capaStatus !== 'Closed'
+				).length}
 			</div>
 		</div>
 		<div class="stat text-accent">
