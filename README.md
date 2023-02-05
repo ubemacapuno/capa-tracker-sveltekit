@@ -1,6 +1,6 @@
 ## CAPA Tracker (Work In Progress)
-<h3><a  href="https://capa-tracker.netlify.app/">View Demo</a> (requires GitHub login)</h3>
-<p>*NOTE: CAPA Tracker is under construction and authentication may become disconnected from production, preventing login access!*</p>
+<!--- <h3><a  href="https://capa-tracker.netlify.app/">View Demo</a> (requires GitHub login)</h3> -->
+<!-- <p>*NOTE: CAPA Tracker is under construction and authentication may become disconnected from production, preventing login access!*</p> -->
 
 <p> CAPA Tracker is a full-stack application that allows users to create CAPA records, add information, update information, and delete entries. CAPA stands for Corrective And Preventive Action, and is a process by which a manufacturing organization can make improvements to reduce non-conformances and process gaps.</p>
 <p>My background is in pharmaceutical and medical device quality assurance; in both industries, CAPA processes are required by regulatory agencies. CAPA Tracker is an app that can help document and keep track of your organization's CAPAs.</p>
