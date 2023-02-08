@@ -9,6 +9,17 @@
 	$: ({ capas } = data);
 	let isEditModalOpen = false;
 
+	$: formatted_capas = capas?.map(({ capaNumber, _id }) => ({
+		capaNumber: {
+			text: capaNumber,
+			path: `/capas/${_id}`
+		},
+		action: {
+			_id,
+			delete_action: `/capas?/delete`
+		}
+	}));
+
 	//Variable declaration for the current capa
 	//Used to bring up the respective "capa" in the edit modal.
 	let currentCapa = {
@@ -185,17 +196,19 @@
 				<div class="card-body p-3">
 					{#if capa.capaStatus !== 'Closed' && capa.capaStatus !== 'Rejected' && new Date(capa.currentPhaseDueDate) < new Date()}
 						<div class="text-warning">
-							<h3 class="card-title">⚠️ {capa.capaNumber} PAST DUE!</h3>
+							<h3 class="card-title">
+								<a href="/capas/{capa._id}">⚠️ {capa.capaNumber} PAST DUE!</a>
+							</h3>
 							<p>{capa.capaStatus}</p>
 							<p>Phase Due Date: {capa.currentPhaseDueDate}</p>
 						</div>
 					{:else if capa.capaStatus === 'Rejected'}
 						<div class="text-error">
-							<h3 class="card-title">⛔ {capa.capaNumber}</h3>
+							<h3 class="card-title"><a href="/capas/{capa._id}">⛔ {capa.capaNumber}</a></h3>
 							<p>{capa.capaStatus}. No Action Needed.</p>
 						</div>
 					{:else if capa.capaStatus !== 'Closed'}
-						<h3 class="card-title">{capa.capaNumber}</h3>
+						<h3 class="card-title"><a href="/capas/{capa._id}">{capa.capaNumber}</a></h3>
 						<p>{capa.capaStatus}</p>
 						<p>Phase Due Date: {capa.currentPhaseDueDate}</p>
 					{:else}

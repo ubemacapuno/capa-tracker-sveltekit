@@ -1,5 +1,5 @@
 import { start_mongo } from '$db/mongo';
-import { Handle } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
 import { SvelteKitAuth } from '@auth/sveltekit';
 import GitHub from '@auth/core/providers/github';
 import { GITHUB_ID, GITHUB_SECRET } from '$env/static/private';
