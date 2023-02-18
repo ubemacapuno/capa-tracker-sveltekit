@@ -9,16 +9,17 @@
 	$: ({ capas } = data);
 	let isEditModalOpen = false;
 
-	$: formatted_capas = capas?.map(({ capaNumber, _id }) => ({
-		capaNumber: {
-			text: capaNumber,
-			path: `/capas/${_id}`
-		},
-		action: {
-			_id,
-			delete_action: `/capas?/delete`
-		}
-	}));
+	//TODO: Use for a table component
+	// $: formatted_capas = capas?.map(({ capaNumber, _id }) => ({
+	// 	capaNumber: {
+	// 		text: capaNumber,
+	// 		path: `/capas/${_id}`
+	// 	},
+	// 	action: {
+	// 		_id,
+	// 		delete_action: `/capas?/delete`
+	// 	}
+	// }));
 
 	//Variable declaration for the current capa
 	//Used to bring up the respective "capa" in the edit modal.
@@ -219,11 +220,7 @@
 					{/if}
 
 					<div class="btn-group flex justify-center">
-						<button
-							on:click={() => ((isEditModalOpen = true), (currentCapa = capa))}
-							type="button"
-							class="btn btn-primary">Open</button
-						>
+						<a href="/capas/{capa._id}" class="btn btn-primary">Open</a>
 						<form
 							method="POST"
 							action="?/delete"
