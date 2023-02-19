@@ -213,7 +213,7 @@
 						<p>Phase Due Date: {capa.currentPhaseDueDate}</p>
 					{:else}
 						<div class="text-accent">
-							<h3 class="card-title">✅ {capa.capaNumber}</h3>
+							<h3 class="card-title"><a href="/capas/{capa._id}">✅ {capa.capaNumber}</a></h3>
 							<p>{capa.capaStatus}. No Action Needed.</p>
 						</div>
 					{/if}
