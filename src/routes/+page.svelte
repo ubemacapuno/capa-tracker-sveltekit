@@ -40,7 +40,8 @@
 				{capaReports.filter(
 					(capaReport) =>
 						new Date(capaReport.currentPhaseDueDate) < new Date() &&
-						capaReport.capaStatus !== 'Closed'
+						capaReport.capaStatus !== 'Closed' &&
+						capaReport.capaStatus !== 'Rejected'
 				).length}
 			</div>
 		</div>
