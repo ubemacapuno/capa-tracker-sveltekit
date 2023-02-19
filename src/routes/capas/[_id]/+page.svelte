@@ -23,38 +23,63 @@
 </script>
 
 {#if capa}
-	{#if capa.capaStatus !== 'Closed' && capa.capaStatus !== 'Rejected' && new Date(capa.currentPhaseDueDate) < new Date()}
-		<div class="text-warning">
-			<h3 class="card-title">
-				⚠️ {capa.capaNumber} PAST DUE!
-			</h3>
-		</div>
-	{:else if capa.capaStatus === 'Rejected'}
-		<div class="text-error">
-			<h3 class="card-title">⛔ {capa.capaNumber}</h3>
-			<p>{capa.capaStatus}. No Action Needed.</p>
-		</div>
-	{:else if capa.capaStatus !== 'Closed'}
-		<h3 class="card-title">{capa.capaNumber}</h3>
-	{:else}
-		<div class="text-accent">
-			<h3 class="card-title">✅ {capa.capaNumber}</h3>
-			<p>{capa.capaStatus}. No Action Needed.</p>
-		</div>
-	{/if}
+	<div class="my-4 card w-80 bg-neutral text-primary-content self-center">
+		<div class="card-body p-3">
+			{#if capa.capaStatus !== 'Closed' && capa.capaStatus !== 'Rejected' && new Date(capa.currentPhaseDueDate) < new Date()}
+				<div class="text-warning">
+					<h3 class="card-title">
+						⚠️ {capa.capaNumber} PAST DUE!
+					</h3>
+				</div>
+			{:else if capa.capaStatus === 'Rejected'}
+				<div class="text-error">
+					<h3 class="card-title">⛔ {capa.capaNumber}</h3>
+					<p>{capa.capaStatus}. No Action Needed.</p>
+				</div>
+			{:else if capa.capaStatus !== 'Closed'}
+				<h3 class="card-title">{capa.capaNumber}</h3>
+			{:else}
+				<div class="text-accent">
+					<h3 class="card-title">✅ {capa.capaNumber}</h3>
+					<p>{capa.capaStatus}. No Action Needed.</p>
+				</div>
+			{/if}
 
-	<p class="text-lg">Status: {capa.capaStatus}</p>
-	<p class="text-lg">Phase: {capa.capaPhase}</p>
-	<p class="text-lg">Date Created: {capa.dateCapaCreated}</p>
-	<p class="text-lg">Date Approved: {capa.dateCapaApproved}</p>
-	<p class="text-lg">Phase Due Date: {capa.currentPhaseDueDate}</p>
-	<p class="text-lg">Problem Statement: {capa.problemStatement}</p>
-	<p class="text-lg">Impacted Product: {capa.productImpacted}</p>
-	<div class="btn-group">
-		<button on:click={() => (isEditModalOpen = true)} type="button" class="btn btn-primary"
-			>Edit</button
-		>
-		<a href="/capas" class="btn btn-error" type="submit">Back</a>
+			<p class="text-lg"><span class="text-accent">Status:</span> {capa.capaStatus}</p>
+			<p class="text-lg"><span class="text-accent">Phase:</span> {capa.capaPhase}</p>
+			<p class="text-lg"><span class="text-accent">Date Created:</span> {capa.dateCapaCreated}</p>
+			<p class="text-lg"><span class="text-accent">Date Approved:</span> {capa.dateCapaApproved}</p>
+			<p class="text-lg"><span class="text-accent">Due Date:</span> {capa.currentPhaseDueDate}</p>
+			<p class="text-lg">
+				<span class="text-accent">Impacted Product:</span>
+				{capa.productImpacted}
+			</p>
+			<div class="text-lg text-accent">
+				Problem Statement:
+				<div class="text-primary-content">
+					{capa.problemStatement}
+				</div>
+			</div>
+			<div class="flex justify-between py-2">
+				<div class="btn-group">
+					<a href="/capas" class="btn btn-secondary" type="submit">Back</a>
+					<button on:click={() => (isEditModalOpen = true)} type="button" class="btn btn-primary"
+						>Edit</button
+					>
+				</div>
+				<form
+					method="POST"
+					action="?/delete"
+					use:enhance={form_action(
+						{ message: 'CAPA deletion' },
+						async (res) => await invalidateAll()
+					)}
+				>
+					<input type="hidden" name="_id" value={capa._id} />
+					<button class="trash btn btn-circle btn-error" type="submit">🗑️</button>
+				</form>
+			</div>
+		</div>
 	</div>
 {:else}
 	<h3>Capa not found</h3>

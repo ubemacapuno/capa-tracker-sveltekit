@@ -2,38 +2,22 @@
 	import { enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import type { PageData } from './$types';
-	import Modal from '$lib/components/Modal.svelte';
 	import { form_action } from '$lib/forms/enhance';
 
 	export let data: PageData;
 	$: ({ capas } = data);
-	let isEditModalOpen = false;
 
-	$: formatted_capas = capas?.map(({ capaNumber, _id }) => ({
-		capaNumber: {
-			text: capaNumber,
-			path: `/capas/${_id}`
-		},
-		action: {
-			_id,
-			delete_action: `/capas?/delete`
-		}
-	}));
-
-	//Variable declaration for the current capa
-	//Used to bring up the respective "capa" in the edit modal.
-	let currentCapa = {
-		_id: '',
-		capaNumber: '',
-		dateCapaCreated: '',
-		capaStatus: '',
-		capaPhase: '',
-		problemStatement: '',
-		dateCapaApproved: '',
-		currentPhaseDueDate: '',
-		productImpacted: '',
-		documentCreated: ''
-	};
+	//TODO: Incorporate Table Component
+	// $: formatted_capas = capas?.map(({ capaNumber, _id }) => ({
+	// 	capaNumber: {
+	// 		text: capaNumber,
+	// 		path: `/capas/${_id}`
+	// 	},
+	// 	action: {
+	// 		_id,
+	// 		delete_action: `/capas?/delete`
+	// 	}
+	// }));
 
 	//Variables for the dropdown selections:
 	let capaStatusOptions = ['Pending', 'Approved', 'Rejected', 'Closed'];
@@ -95,6 +79,7 @@
 		}
 		return true;
 	});
+
 	//Function for resetting form input after submission
 	const clearFormInput = async (event) => {
 		event.target.reset();
@@ -218,23 +203,8 @@
 						</div>
 					{/if}
 
-					<div class="btn-group flex justify-center">
-						<button
-							on:click={() => ((isEditModalOpen = true), (currentCapa = capa))}
-							type="button"
-							class="btn btn-primary">Open</button
-						>
-						<form
-							method="POST"
-							action="?/delete"
-							use:enhance={form_action(
-								{ message: 'CAPA deletion' },
-								async (res) => await invalidateAll()
-							)}
-						>
-							<input type="hidden" name="_id" value={capa._id} />
-							<button class="btn btn-error" type="submit">Delete</button>
-						</form>
+					<div class="flex justify-end">
+						<a class="btn btn-primary" href="/capas/{capa._id}">View</a>
 					</div>
 				</div>
 			</div>
@@ -245,133 +215,6 @@
 		{/each}
 	</div>
 </div>
-
-<Modal bind:isModalOpen={isEditModalOpen}>
-	{#if isEditModalOpen}
-		<span class="self-center py-2 text-accent">Added on {currentCapa.documentCreated}</span>
-		<form
-			class="flex flex-col"
-			method="POST"
-			action="?/update"
-			use:enhance={form_action({ message: 'CAPA Update' }, async () => {
-				await invalidateAll(), (isEditModalOpen = false);
-			})}
-		>
-			<div class="flex flex-row mb-1 justify-between">
-				<label for="capaNumber" class="label p-1">
-					<span class="label-text">Number</span>
-				</label>
-				<input type="hidden" name={'_id'} value={currentCapa._id} />
-				<input
-					type="text"
-					name="capaNumber"
-					class="input w-full max-w-xs"
-					value={currentCapa.capaNumber}
-				/>
-			</div>
-
-			<div class="flex flex-row mb-1 justify-between">
-				<label for="capaStatus" class="label p-1">
-					<span class="label-text">Status</span>
-				</label>
-				<input type="hidden" name={'_id'} value={currentCapa._id} />
-				<select
-					class="modal-select select max-w-xs"
-					name="capaStatus"
-					id="capaStatus"
-					bind:value={currentCapa.capaStatus}
-				>
-					{#each capaStatusOptions as option}
-						<option value={option}>{option}</option>
-					{/each}
-				</select>
-			</div>
-
-			<div class="flex flex-row mb-1 justify-between">
-				<label for="capaPhase" class="label p-1">
-					<span class="label-text">Phase</span>
-				</label>
-				<input type="hidden" name={'_id'} value={currentCapa._id} />
-				<select
-					class="modal-select select max-w-xs p-2"
-					name="capaPhase"
-					id="capaPhase"
-					bind:value={currentCapa.capaPhase}
-				>
-					{#each capaPhaseOptions as option}
-						<option value={option}>{option}</option>
-					{/each}
-				</select>
-			</div>
-
-			<div class="flex flex-row mb-1 justify-between">
-				<label for="dateCapaCreated" class="label p-1">
-					<span class="label-text">Created</span>
-				</label>
-				<input type="hidden" name={'_id'} value={currentCapa._id} />
-				<input
-					type="date"
-					name="dateCapaCreated"
-					class="input w-full max-w-xs"
-					value={currentCapa.dateCapaCreated}
-				/>
-			</div>
-
-			<div class="flex flex-row mb-1 justify-between">
-				<label for="dateCapaCreated" class="label p-1">
-					<span class="label-text">Approved</span>
-				</label>
-				<input type="hidden" name={'_id'} value={currentCapa._id} />
-				<input
-					type="date"
-					name="dateCapaApproved"
-					class="input w-full max-w-xs"
-					value={currentCapa.dateCapaApproved}
-				/>
-			</div>
-
-			<div class="flex flex-row mb-1 justify-between">
-				<label for="currentPhaseDueDate" class="label p-1">
-					<span class="label-text">Due</span>
-				</label>
-				<input type="hidden" name={'_id'} value={currentCapa._id} />
-				<input
-					type="date"
-					name="currentPhaseDueDate"
-					class="input w-full max-w-xs"
-					value={currentCapa.currentPhaseDueDate}
-				/>
-			</div>
-
-			<div class="flex flex-row mb-1 justify-between">
-				<label for="productImpacted" class="label p-1">
-					<span class="label-text">Product</span>
-				</label>
-				<input type="hidden" name={'_id'} value={currentCapa._id} />
-				<input
-					type="text"
-					name="productImpacted"
-					class="input w-full max-w-xs"
-					value={currentCapa.productImpacted}
-				/>
-			</div>
-
-			<div class="flex flex-col mb-1">
-				<label for="capaStatus" class="label p-1">
-					<span class="label-text">Problem Statement</span>
-				</label>
-				<input type="hidden" name={'_id'} value={currentCapa._id} />
-				<textarea
-					name="problemStatement"
-					class="input w-full"
-					value={currentCapa.problemStatement}
-				/>
-			</div>
-
-			<button class="mt-2 btn btn-primary" type="submit">Update</button>
-		</form>
-	{/if}
-</Modal>
 
 <style>
 	#selected-filter {
