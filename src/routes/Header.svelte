@@ -37,12 +37,31 @@
 					class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box border-2 border-base-content w-52 bg-neutral"
 				>
 					{#if $page.data.session}
-						<li><a class="text-accent" href="/">Dashboard</a></li>
-						<li><a class="text-accent" href="/capas">CAPAs</a></li>
-						<li><a class="text-accent" href="/about">About</a></li>
+						<li>
+							<a class:active={$page.url.pathname === '/'} class="text-accent" href="/">Dashboard</a
+							>
+						</li>
+						<li>
+							<a
+								class:active={$page.url.pathname.match(/^\/capas\/?[0-9a-fA-F]*$/)}
+								class="text-accent"
+								href="/capas">CAPAs</a
+							>
+						</li>
+						<li>
+							<a class:active={$page.url.pathname === '/about'} class="text-accent" href="/about"
+								>About</a
+							>
+						</li>
 					{:else}
-						<li><a class="text-accent" href="/">Home</a></li>
-						<li><a class="text-accent" href="/about">About</a></li>
+						<li>
+							<a class:active={$page.url.pathname === '/'} class="text-accent" href="/">Home</a>
+						</li>
+						<li>
+							<a class:active={$page.url.pathname === '/about'} class="text-accent" href="/about"
+								>About</a
+							>
+						</li>
 					{/if}
 					<li class="self-center">
 						<form method="POST" use:enhance={submitUpdateTheme}>
@@ -73,12 +92,30 @@
 		<div class="navbar-center hidden sm:flex">
 			<ul class="menu menu-horizontal p-0">
 				{#if $page.data.session}
-					<li><a class="text-accent" href="/">Dashboard</a></li>
-					<li><a class="text-accent" href="/capas">CAPAs</a></li>
-					<li><a class="text-accent" href="/about">About</a></li>
+					<li>
+						<a class:active={$page.url.pathname === '/'} class="text-accent" href="/">Dashboard</a>
+					</li>
+					<li>
+						<a
+							class:active={$page.url.pathname.match(/^\/capas\/?[0-9a-fA-F]*$/)}
+							class="text-accent"
+							href="/capas">CAPAs</a
+						>
+					</li>
+					<li>
+						<a class:active={$page.url.pathname === '/about'} class="text-accent" href="/about"
+							>About</a
+						>
+					</li>
 				{:else}
-					<li><a class="text-accent" href="/">Home</a></li>
-					<li><a class="text-accent" href="/about">About</a></li>
+					<li>
+						<a class:active={$page.url.pathname === '/'} class="text-accent" href="/">Home</a>
+					</li>
+					<li>
+						<a class:active={$page.url.pathname === '/about'} class="text-accent" href="/about"
+							>About</a
+						>
+					</li>
 				{/if}
 			</ul>
 		</div>
@@ -107,17 +144,8 @@
 				</span>
 				<button class="link link-secondary no-underline" on:click={() => signOut()}>SignOut</button>
 			{:else}
-				<!-- <button class="btn btn-primary" on:click={() => signIn("github")}>Login</button> -->
+				<button class="btn btn-primary" on:click={() => signIn('github')}>Login</button>
 			{/if}
-		</div>
-	</div>
-	<div class="modal" id="my-modal-2">
-		<div class="modal-box">
-			<h3 class="font-bold text-lg">Demo Use!</h3>
-			<p class="py-4">In later versions, this button will log the user out!</p>
-			<div class="modal-action">
-				<a href="#" class="btn">Close</a>
-			</div>
 		</div>
 	</div>
 </header>
