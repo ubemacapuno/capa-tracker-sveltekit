@@ -8,12 +8,10 @@
 <ToastMessage />
 <div class="flex flex-col min-h-screen relative pb-7">
 	<Header />
-	<div class="flex justify-center">
-		<div class="hero-content">
-			<main class="flex flex-col">
-				<slot />
-			</main>
-		</div>
+	<div class="mx-auto">
+		<slot />
 	</div>
-	<Footer />
+	<div class="mt-4">
+		<Footer />
+	</div>
 </div>

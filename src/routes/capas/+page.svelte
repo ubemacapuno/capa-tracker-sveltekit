@@ -153,7 +153,7 @@
 	</div>
 
 	<div class="capa-cards">
-		<div id="filter-group">
+		<div class="bg-neutral" id="filter-group">
 			<button
 				class="btn btn-xl"
 				id={allSelected}
@@ -233,7 +233,6 @@
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
-		background-color: #191d24;
 		border-radius: 1rem;
 	}
 

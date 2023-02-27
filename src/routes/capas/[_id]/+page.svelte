@@ -82,8 +82,12 @@
 		</div>
 	</div>
 {:else}
-	<h3>Capa not found</h3>
-	<a href="/capas">Back to capas</a>
+	<div class="card w-72 bg-neutral shadow-xl">
+		<div class="card-body">
+			<strong class="text-warning text-3xl">Oops! Record not found.</strong>
+			<a class="mt-5 btn btn-secondary" href="/">Back to capas</a>
+		</div>
+	</div>
 {/if}
 
 <Modal bind:isModalOpen={isEditModalOpen}>
