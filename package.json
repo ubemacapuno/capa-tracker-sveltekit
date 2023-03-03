@@ -16,6 +16,7 @@
 		"@sveltejs/adapter-netlify": "^1.0.0",
 		"@sveltejs/adapter-node": "^1.1.0",
 		"@sveltejs/kit": "^1.0.0",
+		"@types/common-tags": "^1.8.1",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.13",
@@ -37,16 +38,18 @@
 	"dependencies": {
 		"@auth/core": "^0.2.5",
 		"@auth/sveltekit": "^0.1.12",
+		"common-tags": "^1.8.2",
 		"cors": "^2.8.5",
+		"daisyui": "^2.42.1",
 		"deep-rename-keys": "^0.2.1",
 		"deep-replace": "^0.0.8",
-		"daisyui": "^2.42.1",
 		"express": "^4.18.2",
 		"lodash.uniqueid": "^4.0.1",
 		"mongodb": "^4.12.1",
 		"morgan": "^1.10.0",
 		"omit-deep": "^0.3.0",
+		"openai": "^3.2.1",
 		"zod": "^3.20.2",
-    	"zod-to-json-schema": "^3.20.1"
+		"zod-to-json-schema": "^3.20.1"
 	}
 }
