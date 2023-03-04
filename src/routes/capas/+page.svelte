@@ -88,7 +88,7 @@
 
 <h1 class="text-3xl font-bold">Add and View CAPAs</h1>
 <div class="flex-container">
-	<div class="add-capas my-4 card w-80 bg-neutral self-center">
+	<div class="add-capas my-4 card w-80 bg-base-300 self-center">
 		<div class="card-body p-3">
 			<h3 class="card-title text-accent">Capas</h3>
 			<form
@@ -177,7 +177,7 @@
 		</div>
 
 		{#each filteredCapas as capa}
-			<div class="my-4 card w-80 bg-neutral text-primary-content self-center">
+			<div class="my-4 card w-80 bg-base-300 text-primary-content self-center">
 				<div class="card-body p-3">
 					{#if capa.capaStatus !== 'Closed' && capa.capaStatus !== 'Rejected' && new Date(capa.currentPhaseDueDate) < new Date()}
 						<div class="text-warning">

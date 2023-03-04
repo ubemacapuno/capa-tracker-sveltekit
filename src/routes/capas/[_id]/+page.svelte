@@ -23,7 +23,7 @@
 </script>
 
 {#if capa}
-	<div class="my-4 card w-80 bg-neutral text-primary-content self-center">
+	<div class="my-4 card w-80 bg-base-300 text-primary-content self-center">
 		<div class="card-body p-3">
 			{#if capa.capaStatus !== 'Closed' && capa.capaStatus !== 'Rejected' && new Date(capa.currentPhaseDueDate) < new Date()}
 				<div class="text-warning">
@@ -82,7 +82,7 @@
 		</div>
 	</div>
 {:else}
-	<div class="card w-72 bg-neutral shadow-xl">
+	<div class="card w-72 bg-base-300 shadow-xl">
 		<div class="card-body">
 			<strong class="text-warning text-3xl">Oops! Record not found.</strong>
 			<a class="mt-5 btn btn-secondary" href="/">Back to capas</a>

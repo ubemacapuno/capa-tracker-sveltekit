@@ -34,7 +34,7 @@
 				</label>
 				<ul
 					tabindex="0"
-					class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box border-2 border-base-content w-52 bg-neutral"
+					class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box border-2 border-base-content w-52 bg-bg-base-300"
 				>
 					{#if $page.data.session}
 						<li>
@@ -53,6 +53,11 @@
 								>About</a
 							>
 						</li>
+						<li>
+							<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
+								>Help</a
+							>
+						</li>
 					{:else}
 						<li>
 							<a class:active={$page.url.pathname === '/'} class="text-accent" href="/">Home</a>
@@ -60,6 +65,11 @@
 						<li>
 							<a class:active={$page.url.pathname === '/about'} class="text-accent" href="/about"
 								>About</a
+							>
+						</li>
+						<li>
+							<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
+								>Help</a
 							>
 						</li>
 					{/if}
@@ -107,6 +117,11 @@
 							>About</a
 						>
 					</li>
+					<li>
+						<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
+							>Help</a
+						>
+					</li>
 				{:else}
 					<li>
 						<a class:active={$page.url.pathname === '/'} class="text-accent" href="/">Home</a>
@@ -114,6 +129,11 @@
 					<li>
 						<a class:active={$page.url.pathname === '/about'} class="text-accent" href="/about"
 							>About</a
+						>
+					</li>
+					<li>
+						<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
+							>Help</a
 						>
 					</li>
 				{/if}
