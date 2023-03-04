@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { CreateCompletionResponse } from 'openai';
 	import { SSE } from 'sse.js';
+
 	let context = '';
 	let loading = false;
 	let error = false;
@@ -73,6 +74,9 @@
 			<div class="pt-4">
 				<h2 class="text-lg font-bold mb-2">Explanation:</h2>
 				<div>
+					{#if loading}
+						<div class="btn loading">Thinking</div>
+					{/if}
 					{#if answer}
 						<p class="italic text-accent">{answer}</p>
 					{/if}
