@@ -55,7 +55,7 @@
 	};
 </script>
 
-<div class="mx-2 card bg-base-300 shadow-xl mx-1 w-full">
+<div class="mx-2 card bg-base-300 shadow-xl max-w-3xl">
 	<div class="card-body">
 		<h1 class="text-3xl font-bold text-primary">ChatBot Assistant</h1>
 		<p>
@@ -72,7 +72,7 @@
 			<button class="btn btn-primary my-1">Explain it</button>
 			<div class="pt-4">
 				<h2 class="text-lg font-bold mb-2">Explanation:</h2>
-				<div class="max-w-xl">
+				<div>
 					{#if answer}
 						<p class="italic text-accent">{answer}</p>
 					{/if}
