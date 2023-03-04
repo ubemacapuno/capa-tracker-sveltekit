@@ -49,6 +49,7 @@
 		"morgan": "^1.10.0",
 		"omit-deep": "^0.3.0",
 		"openai": "^3.2.1",
+		"sse.js": "^0.6.1",
 		"zod": "^3.20.2",
 		"zod-to-json-schema": "^3.20.1"
 	}

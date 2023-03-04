@@ -28,6 +28,7 @@ specifiers:
   postcss: ^8.4.20
   prettier: ^2.8.0
   prettier-plugin-svelte: ^2.8.1
+  sse.js: ^0.6.1
   svelte: ^3.54.0
   svelte-check: ^2.9.2
   svelte-portal: ^2.1.2
@@ -52,6 +53,7 @@ dependencies:
   morgan: 1.10.0
   omit-deep: 0.3.0
   openai: 3.2.1
+  sse.js: 0.6.1
   zod: 3.20.2
   zod-to-json-schema: 3.20.2_zod@3.20.2
 
@@ -3346,6 +3348,10 @@ packages:
       memory-pager: 1.5.0
     dev: false
     optional: true
+
+  /sse.js/0.6.1:
+    resolution: {integrity: sha512-peXG6GnWqF5hnubhMw0WfB6rqQy7z7LaMBT067vqgQwC3gKz8JGFzexBSV80FqZ9JoUDwo3Xt5nxkrGrgbPrtA==}
+    dev: false
 
   /statuses/2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
