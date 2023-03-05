@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { sendToast } from '$lib/stores/toast';
 	import type { CreateCompletionResponse } from 'openai';
 	import { SSE } from 'sse.js';
 
@@ -6,11 +7,13 @@
 	let loading = false;
 	let error = false;
 	let answer = '';
+	let success = false;
 
 	const handleSubmit = async () => {
 		loading = true;
 		error = false;
 		answer = '';
+		success = false;
 
 		const eventSource = new SSE('/api/explain', {
 			headers: {
@@ -24,8 +27,8 @@
 		eventSource.addEventListener('error', (e) => {
 			error = true;
 			loading = false;
-			//Toast
-			alert('Something went wrong!');
+			sendToast(`Something went wrong!`, 'error');
+			console.log(e);
 		});
 
 		eventSource.addEventListener('message', (e) => {
@@ -41,17 +44,22 @@
 				const [{ text }] = completionResponse.choices;
 
 				answer = (answer ?? '') + text;
+
+				if (!success) {
+					sendToast(`Request sent successfully!`, 'success');
+					success = true;
+				}
 			} catch (err) {
 				error = true;
 
 				loading = false;
 
 				console.error(err);
-				//Toast
-				alert('Something went wrong!');
+				sendToast(`Something went wrong! \n ${e}`, 'error');
+				console.log(e);
+				return;
 			}
 		});
-
 		eventSource.stream();
 	};
 </script>
@@ -70,7 +78,7 @@
 		>
 			<label class="font-bold" for="context">Ask any questions you want explained:</label>
 			<textarea class="textarea" name="context" rows="5" bind:value={context} />
-			<button class="btn btn-primary my-1">Explain it</button>
+			<button class="btn btn-primary my-1">Submit</button>
 			<div class="pt-4">
 				<h2 class="text-lg font-bold mb-2">Explanation:</h2>
 				<div>
