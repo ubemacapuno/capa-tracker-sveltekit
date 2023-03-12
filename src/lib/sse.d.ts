@@ -1,3 +1,4 @@
+//Types for sse.js library. @see https://www.npmjs.com/package/sse
 declare module 'sse.js' {
 	export type SSEOptions = EventSourceInit & {
 		headers?: Record<string, string>;
