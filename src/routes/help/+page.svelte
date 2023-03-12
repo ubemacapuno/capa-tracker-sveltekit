@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { sendToast } from '$lib/stores/toast';
 	import ChatMessage from '$lib/components/ChatMessage.svelte';
 	import type { ChatCompletionRequestMessage } from 'openai';
 	import { SSE } from 'sse.js';
@@ -49,6 +50,7 @@
 		query = '';
 		answer = '';
 		console.error(err);
+		sendToast(`Something went wrong with the request!`, 'error');
 	}
 </script>
 
