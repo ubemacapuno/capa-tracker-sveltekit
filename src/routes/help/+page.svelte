@@ -1,95 +1,94 @@
 <script lang="ts">
-	import { sendToast } from '$lib/stores/toast';
-	import type { CreateCompletionResponse } from 'openai';
+	import ChatMessage from '$lib/components/ChatMessage.svelte';
+	import type { ChatCompletionRequestMessage } from 'openai';
 	import { SSE } from 'sse.js';
-
-	let context = '';
-	let loading = false;
-	let error = false;
-	let answer = '';
-	let success = false;
-
+	let query: string = '';
+	let answer: string = '';
+	let loading: boolean = false;
+	let chatMessages: ChatCompletionRequestMessage[] = [];
+	let scrollToDiv: HTMLDivElement;
+	function scrollToBottom() {
+		setTimeout(function () {
+			scrollToDiv.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+		}, 100);
+	}
 	const handleSubmit = async () => {
 		loading = true;
-		error = false;
-		answer = '';
-		success = false;
-
-		const eventSource = new SSE('/api/explain', {
+		chatMessages = [...chatMessages, { role: 'user', content: query }];
+		const eventSource = new SSE('/api/chat', {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			payload: JSON.stringify({ context })
+			payload: JSON.stringify({ messages: chatMessages })
 		});
-
-		context = '';
-
-		eventSource.addEventListener('error', (e) => {
-			error = true;
-			loading = false;
-			sendToast(`Something went wrong!`, 'error');
-			console.log(e);
-		});
-
+		query = '';
+		eventSource.addEventListener('error', handleError);
 		eventSource.addEventListener('message', (e) => {
+			scrollToBottom();
 			try {
 				loading = false;
-
 				if (e.data === '[DONE]') {
+					chatMessages = [...chatMessages, { role: 'assistant', content: answer }];
+					answer = '';
 					return;
 				}
-
-				const completionResponse: CreateCompletionResponse = JSON.parse(e.data);
-
-				const [{ text }] = completionResponse.choices;
-
-				answer = (answer ?? '') + text;
-
-				if (!success) {
-					sendToast(`Request sent successfully!`, 'success');
-					success = true;
+				const completionResponse = JSON.parse(e.data);
+				const [{ delta }] = completionResponse.choices;
+				if (delta.content) {
+					answer = (answer ?? '') + delta.content;
 				}
 			} catch (err) {
-				error = true;
-
-				loading = false;
-
-				console.error(err);
-				sendToast(`Something went wrong! \n ${e}`, 'error');
-				console.log(e);
-				return;
+				handleError(err);
 			}
 		});
 		eventSource.stream();
+		scrollToBottom();
 	};
+	function handleError<T>(err: T) {
+		loading = false;
+		query = '';
+		answer = '';
+		console.error(err);
+	}
 </script>
 
-<div class="mx-2 card bg-base-300 shadow-xl max-w-3xl">
-	<div class="card-body">
-		<h1 class="text-3xl font-bold text-primary">ChatBot Assistant</h1>
-		<p>
-			The CAPATracker ChatBot Assistant is familiar with quality assurance and compliance as it
-			relates to the manufacturing industry.
+<div class="flex flex-col pt-4 w-full px-2 items-start gap-2">
+	<div>
+		<h1 class="text-2xl font-bold w-full text-center text-primary">Virtual Assistant</h1>
+		<p class="text-sm">
+			Powered by <a
+				target="_blank"
+				rel="noreferrer"
+				href="https://openai.com/blog/introducing-chatgpt-and-whisper-apis"
+				class="text-secondary">OpenAI</a
+			>
 		</p>
-
-		<form
-			class="flex flex-col align-center gap-1 py-2"
-			on:submit|preventDefault={() => handleSubmit()}
-		>
-			<label class="font-bold" for="context">Ask any questions you want explained:</label>
-			<textarea class="textarea" name="context" rows="5" bind:value={context} />
-			<button class="btn btn-primary my-1">Submit</button>
-			<div class="pt-4">
-				<h2 class="text-lg font-bold mb-2">Explanation:</h2>
-				<div>
-					{#if loading}
-						<div class="btn loading">Thinking</div>
-					{/if}
-					{#if answer}
-						<p class="italic text-accent">{answer}</p>
-					{/if}
-				</div>
-			</div>
-		</form>
 	</div>
+	<div class="h-[500px] w-full bg-base-300 rounded-md p-4 overflow-y-auto flex flex-col gap-4">
+		<div class="flex flex-col gap-2">
+			<ChatMessage
+				type="assistant"
+				message="Hello! I am a Virtual Assistant for CAPATracker. Ask me anything!"
+			/>
+			{#each chatMessages as message}
+				<ChatMessage type={message.role} message={message.content} />
+			{/each}
+			{#if answer}
+				<ChatMessage type="assistant" message={answer} />
+			{/if}
+			{#if loading}
+				<ChatMessage type="assistant" message="">
+					<div class="btn loading">Thinking</div>
+				</ChatMessage>
+			{/if}
+		</div>
+		<div class="" bind:this={scrollToDiv} />
+	</div>
+	<form
+		class="flex w-full rounded-md gap-4 bg-base-300 p-4"
+		on:submit|preventDefault={() => handleSubmit()}
+	>
+		<input type="text" class="input input-bordered w-full" bind:value={query} />
+		<button type="submit" class="btn btn-primary"> Send </button>
+	</form>
 </div>
