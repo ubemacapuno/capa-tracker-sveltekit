@@ -1,8 +1,5 @@
 <script>
-	//The page store is a store that is built into svelte
 	import { page } from '$app/stores';
-	//Let's disect the page object with a console log and make it reactive!
-	$: console.log('page', $page);
 </script>
 
 <div class="card w-72 bg-base-300 shadow-xl">
