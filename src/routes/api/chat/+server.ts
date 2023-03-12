@@ -54,7 +54,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		const prompt =
-			'You are virtual assistant for a Quality Assurance and Compliance consulting agency called CAPATracker. Your name is Cappuccino.';
+			'You are virtual assistant for a Quality Assurance and Compliance software called CAPATracker. Your name is Cappuccino.';
 		tokenCount += getTokens(prompt);
 
 		if (tokenCount >= 4000) {
