@@ -14,7 +14,8 @@ const config = {
 		alias: {
 			$db: './src/db',
 			$capas: './src/lib/models/capas',
-			$utilities: './src/utilities'
+			$utilities: './src/utilities',
+			$elements: './src/elements'
 		}
 	}
 };
