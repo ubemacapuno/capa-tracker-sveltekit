@@ -3,9 +3,10 @@
 	import ChatMessage from '$lib/components/ChatMessage.svelte';
 	import type { ChatCompletionRequestMessage } from 'openai';
 	import { SSE } from 'sse.js';
+	import EmptyState from '$lib/components/EmptyState.svelte';
 	let query: string = '';
 	let answer: string = '';
-	let loading: boolean = false;
+	let isLoading: boolean = false;
 	let chatMessages: ChatCompletionRequestMessage[] = [];
 	let scrollToDiv: HTMLDivElement;
 	function scrollToBottom() {
@@ -14,7 +15,7 @@
 		}, 100);
 	}
 	const handleSubmit = async () => {
-		loading = true;
+		isLoading = true;
 		chatMessages = [...chatMessages, { role: 'user', content: query }];
 		const eventSource = new SSE('/api/chat', {
 			headers: {
@@ -27,7 +28,7 @@
 		eventSource.addEventListener('message', (e) => {
 			scrollToBottom();
 			try {
-				loading = false;
+				isLoading = false;
 				if (e.data === '[DONE]') {
 					chatMessages = [...chatMessages, { role: 'assistant', content: answer }];
 					answer = '';
@@ -46,7 +47,7 @@
 		scrollToBottom();
 	};
 	function handleError<T>(err: T) {
-		loading = false;
+		isLoading = false;
 		query = '';
 		answer = '';
 		console.error(err);
@@ -79,9 +80,9 @@
 				{#if answer}
 					<ChatMessage type="assistant" message={answer} />
 				{/if}
-				{#if loading}
+				{#if isLoading}
 					<ChatMessage type="assistant" message="">
-						<div class="btn loading">Thinking</div>
+						<EmptyState {isLoading} message="Thinking" />
 					</ChatMessage>
 				{/if}
 			</div>

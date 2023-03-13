@@ -8,10 +8,11 @@
 	export let title = '';
 	export let description = '';
 	export let isLoading = false;
+	export let message = '';
 </script>
 
 {#if isLoading}
-	<div class="btn loading">Thinking</div>
+	<div class="btn loading">{message}</div>
 {:else}
 	<div class="alert shadow-lg">
 		<div>

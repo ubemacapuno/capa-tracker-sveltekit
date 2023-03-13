@@ -162,11 +162,15 @@
 						>{$page.data.session.user?.name ?? 'User'}</strong
 					>
 				</span>
-				<button class="btn btn-sm btn-outline link no-underline" on:click={() => signOut()}
-					>Logout</button
+				<button
+					class="btn btn-sm btn-outline btn-secondary link no-underline"
+					on:click={() => signOut()}>Logout</button
 				>
 			{:else}
-				<button class="btn btn-primary" on:click={() => signIn('github')}>Login</button>
+				<button
+					class="btn btn-sm btn-outline btn-primary link no-underline"
+					on:click={() => signIn('github')}>Login</button
+				>
 			{/if}
 		</div>
 	</div>
