@@ -1,10 +1,4 @@
 <script lang="ts">
-	//TODO: Use aliasing here.
-	// import type { Accent } from '../../elements/element-types';
-	// import { ACCENT } from '$utilities/constants';
-	// import Loader from '$lib/components/Loader.svelte'
-	// export let accent: Accent = 'info';
-	// export let minHeight: string = '32rem';
 	export let title = '';
 	export let description = '';
 	export let isLoading = false;
@@ -35,13 +29,3 @@
 	</div>
 {/if}
 <slot />
-
-<!-- <style lang="postcss">
-	.state_wrapper {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: var(--gap_small);
-	}
-</style> -->
