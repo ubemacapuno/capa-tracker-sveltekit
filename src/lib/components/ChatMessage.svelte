@@ -1,5 +1,4 @@
 <script lang="ts">
-	import chatBotAvatar from '$lib/icons/avatar.jpg';
 	import type { ChatCompletionRequestMessageRoleEnum } from 'openai';
 	export let type: ChatCompletionRequestMessageRoleEnum;
 	export let message: string;
@@ -8,12 +7,12 @@
 <div class="chat {type === 'user' ? 'chat-end' : 'chat-start'} justify-end">
 	<div class="chat-image avatar online">
 		{#if type === 'user'}
-			<div class="user_avatar_wrapper bg-neutral-focus text-accent rounded-full w-10">
+			<div class="user_avatar_wrapper bg-neutral-focus text-primary rounded-full w-10">
 				<span class="text-xl">ME</span>
 			</div>
 		{:else}
-			<div class="w-10 rounded-full">
-				<img src={chatBotAvatar} alt="Chat Bot Avatar" />
+			<div class="user_avatar_wrapper bg-neutral-focus text-secondary rounded-full w-10">
+				<span class="text-xl">C</span>
 			</div>
 		{/if}
 	</div>
