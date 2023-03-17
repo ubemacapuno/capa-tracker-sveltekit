@@ -82,7 +82,7 @@
 				{/if}
 				{#if isLoading}
 					<ChatMessage type="assistant" message="">
-						<EmptyState {isLoading} message="Thinking" />
+						<EmptyState {isLoading} message="Typing . . ." />
 					</ChatMessage>
 				{/if}
 			</div>
