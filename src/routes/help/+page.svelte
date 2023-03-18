@@ -51,7 +51,7 @@
 		query = '';
 		answer = '';
 		console.error(err);
-		sendToast(`Something went wrong with the request!`, 'error');
+		sendToast(`${err}`, 'error');
 	}
 </script>
 

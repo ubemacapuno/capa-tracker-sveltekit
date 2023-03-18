@@ -27,8 +27,12 @@
 	<div class="card bg-base-300 max-w-3xl shadow-xl mx-1">
 		<div class="card-body">
 			<h1 class="text-3xl font-bold text-primary">Dashboard</h1>
-			<p>Signed in as <span class="text-accent">{$page.data.session.user?.name ?? 'User'}</span></p>
-
+			<p>
+				Signed in as
+				<a href="/user">
+					<span class="font-bold text-accent">{$page.data.session.user?.name ?? 'User'}</span>
+				</a>
+			</p>
 			<div class="mt-5 bg-base-200 stats-vertical w-full">
 				<div class="stat">
 					<div class="stat-title">Total CAPAs Open</div>

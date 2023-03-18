@@ -49,13 +49,18 @@
 							>
 						</li>
 						<li>
+							<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
+								>Virtual Assistant</a
+							>
+						</li>
+						<li>
 							<a class:active={$page.url.pathname === '/about'} class="text-accent" href="/about"
 								>About</a
 							>
 						</li>
 						<li>
-							<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
-								>Help</a
+							<a class:active={$page.url.pathname === '/user'} class="text-accent" href="/user"
+								>Profile</a
 							>
 						</li>
 					{:else}
@@ -69,7 +74,7 @@
 						</li>
 						<li>
 							<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
-								>Help</a
+								>Virtual Assistant</a
 							>
 						</li>
 					{/if}
@@ -113,13 +118,18 @@
 						>
 					</li>
 					<li>
+						<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
+							>Virtual Assistant</a
+						>
+					</li>
+					<li>
 						<a class:active={$page.url.pathname === '/about'} class="text-accent" href="/about"
 							>About</a
 						>
 					</li>
 					<li>
-						<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
-							>Help</a
+						<a class:active={$page.url.pathname === '/user'} class="text-accent" href="/user"
+							>Profile</a
 						>
 					</li>
 				{:else}
@@ -133,7 +143,7 @@
 					</li>
 					<li>
 						<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
-							>Help</a
+							>Virtual Assistant</a
 						>
 					</li>
 				{/if}
