@@ -51,7 +51,7 @@
 		query = '';
 		answer = '';
 		console.error(err);
-		sendToast(`${err}`, 'error');
+		sendToast(`Error processing your request!`, 'error');
 	}
 </script>
 

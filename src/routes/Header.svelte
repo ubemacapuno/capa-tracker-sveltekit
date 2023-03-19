@@ -50,7 +50,7 @@
 						</li>
 						<li>
 							<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
-								>Virtual Assistant</a
+								>Help 🤖</a
 							>
 						</li>
 						<li>
@@ -74,7 +74,7 @@
 						</li>
 						<li>
 							<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
-								>Virtual Assistant</a
+								>Help 🤖</a
 							>
 						</li>
 					{/if}
@@ -119,7 +119,7 @@
 					</li>
 					<li>
 						<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
-							>Virtual Assistant</a
+							>Help</a
 						>
 					</li>
 					<li>
@@ -143,7 +143,7 @@
 					</li>
 					<li>
 						<a class:active={$page.url.pathname === '/help'} class="text-accent" href="/help"
-							>Virtual Assistant</a
+							>Help</a
 						>
 					</li>
 				{/if}

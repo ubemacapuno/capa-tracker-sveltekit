@@ -11,8 +11,14 @@
 <div class="chat {type === 'user' ? 'chat-end' : 'chat-start'} justify-end">
 	<div class="chat-image avatar online">
 		{#if type === 'user'}
-			<div class="user_avatar_wrapper bg-neutral-focus text-primary rounded-full w-10">
-				<span class="text-xl">{avatarInitials}</span>
+			<div class="avatar online placeholder">
+				<div class="bg-neutral-focus text-neutral-content rounded-full w-10">
+					{#if $page.data.session?.user?.image}
+						<img src={$page.data.session?.user?.image} alt="User avatar." />
+					{:else}
+						<span class="text-xl">{avatarInitials}</span>
+					{/if}
+				</div>
 			</div>
 		{:else}
 			<div class="user_avatar_wrapper bg-neutral-focus text-secondary rounded-full w-10">
