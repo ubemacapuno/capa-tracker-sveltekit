@@ -5,3 +5,4 @@ export const load: PageServerLoad = async (event) => {
 		session: await event.locals.getSession()
 	};
 };
+//test
