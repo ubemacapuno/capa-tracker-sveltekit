@@ -29,7 +29,9 @@
 	<div class="chat-header">
 		{type === 'user' ? 'Me' : 'CAPATracker Assistant'}
 	</div>
-	<div class="chat-bubble {type === 'user' ? 'chat-bubble-primary' : 'chat-bubble-secondary'}">
+	<div
+		class="max-w-sm chat-bubble {type === 'user' ? 'chat-bubble-primary' : 'chat-bubble-secondary'}"
+	>
 		{message}
 		<slot />
 	</div>

@@ -97,3 +97,7 @@
 		</form>
 	</div>
 </div>
+<p class="text-xs italic text-warning max-w-xl mx-2 my-2">
+	Due to Netlify's limitations with Server-Sent Events (SSE), responses exceeding 10 seconds may
+	result in a timeout and an error. Please be aware of potential disruptions!
+</p>
