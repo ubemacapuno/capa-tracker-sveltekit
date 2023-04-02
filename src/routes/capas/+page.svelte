@@ -3,6 +3,9 @@
 	import { invalidateAll } from '$app/navigation';
 	import type { PageData } from './$types';
 	import { form_action } from '$lib/forms/enhance';
+	import { superForm } from 'sveltekit-superforms/client';
+	import Switch from '$lib/components/Switch.svelte';
+	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
 
 	export let data: PageData;
 	$: ({ capas } = data);
@@ -84,14 +87,19 @@
 	const clearFormInput = async (event) => {
 		event.target.reset();
 	};
+
+	// Client SuperForms API:
+	const { form } = superForm(data.form);
+
+	let showDebug = false;
 </script>
 
 <h1 class="text-3xl font-bold">Add and View CAPAs</h1>
 <div class="flex-container">
 	<div class="add-capas my-4 card w-80 bg-base-300 self-center">
 		<div class="card-body p-3">
-			<h3 class="card-title text-accent">Capas</h3>
-			<form
+			<!-- <h3 class="card-title text-accent">Capas</h3> -->
+			<!-- <form
 				method="POST"
 				action="?/create"
 				use:enhance={form_action(
@@ -148,7 +156,113 @@
 				<input type="text" name="productImpacted" class="mb-4 input w-full max-w-s" />
 				<input type="hidden" name="documentCreated" value={new Date(Date.now()).toLocaleString()} />
 				<button class="btn btn-primary" type="submit">Submit</button>
+			</form> -->
+			<!-- SuperForms test-->
+			<h3 class="card-title text-accent">SuperForms Test</h3>
+
+			<form
+				method="POST"
+				action="?/create"
+				use:enhance={form_action(
+					{ message: 'CAPA creation' },
+					async (res) => await invalidateAll()
+				)}
+				class="flex flex-col align-center gap-1 p-2"
+				on:submit|preventDefault={(e) => clearFormInput(e)}
+			>
+				<div>
+					<label for="capaNumber" class="label p-1 label-text text-primary-content">
+						CAPA Number
+					</label>
+					<input
+						type="text"
+						name="capaNumber"
+						bind:value={$form.capaNumber}
+						class="mb-4 input w-full max-w-s"
+					/>
+				</div>
+
+				<label for="dateCapaCreated" class="label p-1 label-text text-primary-content">
+					Date Created
+				</label>
+				<input
+					type="date"
+					name="dateCapaCreated"
+					bind:value={$form.dateCapaCreated}
+					class="mb-4 input w-full max-w-s"
+				/>
+
+				<label for="capaStatus" class="label p-1 label-text text-primary-content"> Status </label>
+				<select
+					class="select w-full max-w-xs"
+					name="capaStatus"
+					bind:value={$form.capaStatus}
+					id="capaStatus"
+				>
+					{#each capaStatusOptions as option}
+						<option value={option}>{option}</option>
+					{/each}
+				</select>
+
+				<label for="capaPhase" class="label p-1 label-text text-primary-content"> Phase </label>
+				<select
+					class="select w-full max-w-xs"
+					name="capaPhase"
+					bind:value={$form.capaPhase}
+					id="capaStatus"
+				>
+					{#each capaPhaseOptions as option}
+						<option value={option}>{option}</option>
+					{/each}
+				</select>
+
+				<label for="problemStatement" class="label p-1 label-text text-primary-content">
+					Problem Statement
+				</label>
+				<textarea
+					rows="3"
+					name="problemStatement"
+					bind:value={$form.problemStatement}
+					class="textarea textarea-bordered mb-4"
+				/>
+
+				<label for="dateCapaApproved" class="label p-1 label-text text-primary-content">
+					Date Approved
+				</label>
+				<input
+					type="date"
+					name="dateCapaApproved"
+					bind:value={$form.dateCapaApproved}
+					class="mb-4 input w-full max-w-s"
+				/>
+
+				<label for="currentPhaseDueDate" class="label p-1 label-text text-primary-content">
+					Phase Due Date
+				</label>
+				<input
+					type="date"
+					name="currentPhaseDueDate"
+					bind:value={$form.currentPhaseDueDate}
+					class="mb-4 input w-full max-w-s"
+				/>
+
+				<label for="productImpacted" class="label p-1 label-text text-primary-content">
+					Product Impacted
+				</label>
+				<input
+					type="text"
+					name="productImpacted"
+					bind:value={$form.productImpacted}
+					class="mb-4 input w-full max-w-s"
+				/>
+				<input type="hidden" name="documentCreated" value={new Date(Date.now()).toLocaleString()} />
+				<button class="btn btn-primary" type="submit">Submit</button>
 			</form>
+			<p class="text-warning">Form Debugger</p>
+			<Switch bind:checked={showDebug} />
+			{#if showDebug}
+				<SuperDebug data={$form} />
+			{/if}
 		</div>
 	</div>
 
