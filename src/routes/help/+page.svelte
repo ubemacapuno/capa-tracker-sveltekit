@@ -55,6 +55,13 @@
 	}
 </script>
 
+<p class="text-xs italic text-warning max-w-xl mx-2 my-2">
+	* This application utilizes a paid OpenAI API account with limited usage. Please be aware that
+	there may be occasional delays or disruptions due to API usage limitations. Additionally, due to
+	Netlify's limitations with Server-Sent Events (SSE), responses exceeding 10 seconds may result in
+	a timeout and an error.
+</p>
+
 <div class="bg-neutral card max-w-3xl shadow-xl mx-1">
 	<div class="flex flex-col py-4 w-full px-2 items-start gap-2">
 		<div>
@@ -97,7 +104,3 @@
 		</form>
 	</div>
 </div>
-<p class="text-xs italic text-warning max-w-xl mx-2 my-2">
-	Due to Netlify's limitations with Server-Sent Events (SSE), responses exceeding 10 seconds may
-	result in a timeout and an error. Please be aware of potential disruptions!
-</p>
