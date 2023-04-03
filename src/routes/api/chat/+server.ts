@@ -5,7 +5,6 @@ import { getTokens } from '$lib/tokenizer';
 import { json } from '@sveltejs/kit';
 import type { Config } from '@sveltejs/adapter-vercel';
 
-console.log(`KEY: ${OPENAI_KEY}`);
 export const config: Config = {
 	runtime: 'edge'
 };
@@ -54,7 +53,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		const prompt =
-			'You are virtual assistant for a Quality Assurance and Compliance software called CAPATracker. Your name is Cappuccino.';
+			'Please provide a short response of around 5 sentences: [You are virtual assistant for a Quality Assurance and Compliance software called CAPATracker. Your name is Cappuccino.]';
 		tokenCount += getTokens(prompt);
 
 		if (tokenCount >= 4000) {
@@ -70,6 +69,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			model: 'gpt-3.5-turbo',
 			messages,
 			temperature: 0.3,
+			max_tokens: 200,
 			stream: true
 		};
 

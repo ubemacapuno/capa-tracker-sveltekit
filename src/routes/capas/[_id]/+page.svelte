@@ -85,7 +85,7 @@
 	<div class="card w-72 bg-base-300 shadow-xl">
 		<div class="card-body">
 			<strong class="text-warning text-3xl">Oops! Record not found.</strong>
-			<a class="mt-5 btn btn-secondary" href="/">Back to capas</a>
+			<a class="mt-5 btn btn-secondary" href="/capas">Back to capas</a>
 		</div>
 	</div>
 {/if}

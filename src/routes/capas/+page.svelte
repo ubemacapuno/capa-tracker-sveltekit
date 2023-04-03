@@ -158,7 +158,7 @@
 				<button class="btn btn-primary" type="submit">Submit</button>
 			</form> -->
 			<!-- SuperForms test-->
-			<h3 class="card-title text-accent">SuperForms Test</h3>
+			<h3 class="card-title text-accent">CAPAs</h3>
 
 			<form
 				method="POST"
@@ -258,7 +258,14 @@
 				<input type="hidden" name="documentCreated" value={new Date(Date.now()).toLocaleString()} />
 				<button class="btn btn-primary" type="submit">Submit</button>
 			</form>
-			<p class="text-warning">Form Debugger</p>
+			<p class="text-warning">
+				<a
+					class="link link-accent"
+					href="https://superforms.vercel.app/get-started"
+					target="_blank"
+					rel="noreferrer">Superforms</a
+				> Debugger:
+			</p>
 			<Switch bind:checked={showDebug} />
 			{#if showDebug}
 				<SuperDebug data={$form} />

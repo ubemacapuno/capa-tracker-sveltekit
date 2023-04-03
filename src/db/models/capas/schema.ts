@@ -27,7 +27,7 @@ export const capas_schema = z.object({
 	productImpacted: z.string(),
 	//TODO: Figure out why z.date() doesn't accept the date-string provided from frontend:
 	//TODO: Why is the default fallback not working?
-	documentCreated: z.string().default(() => `Test default string`)
+	documentCreated: z.string().default(() => '')
 });
 
 export const capas_raw_schema_json = zodToJsonSchema(capas_schema, {
