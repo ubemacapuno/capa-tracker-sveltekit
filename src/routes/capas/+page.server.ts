@@ -7,15 +7,6 @@ import { capas_schema } from '$db/models/capas/schema';
 
 const schema = capas_schema;
 
-//Prior to superforms
-// export const load = async function () {
-// 	const all_capas = await capas.find({}, { sort: { order: 1 } }).toArray();
-
-// 	return {
-// 		capas: fix_pojo(all_capas)
-// 	};
-// } satisfies PageServerLoad;
-
 export const load = (async (event) => {
 	// Server API:
 	const form = await superValidate(event, schema);

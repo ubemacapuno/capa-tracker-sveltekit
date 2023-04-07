@@ -6,6 +6,7 @@
 	import { superForm } from 'sveltekit-superforms/client';
 	import Switch from '$lib/components/Switch.svelte';
 	import SuperDebug from 'sveltekit-superforms/client/SuperDebug.svelte';
+	import { slide, fly, fade } from 'svelte/transition';
 
 	export let data: PageData;
 	$: ({ capas } = data);
@@ -258,17 +259,17 @@
 				<input type="hidden" name="documentCreated" value={new Date(Date.now()).toLocaleString()} />
 				<button class="btn btn-primary" type="submit">Submit</button>
 			</form>
-			<p class="text-warning">
-				<a
-					class="link link-accent"
-					href="https://superforms.vercel.app/get-started"
-					target="_blank"
-					rel="noreferrer">Superforms</a
-				> Debugger:
-			</p>
-			<Switch bind:checked={showDebug} />
+			<div class="flex justify-between content-center">
+				<span class={showDebug ? 'text-warning' : ''}>Form Debugger</span>
+				{#if showDebug}
+					<span transition:fly={{ y: -200, duration: 200 }}>🐞</span>
+				{/if}
+				<Switch bind:checked={showDebug} />
+			</div>
 			{#if showDebug}
-				<SuperDebug data={$form} />
+				<div transition:slide|local>
+					<SuperDebug data={$form} />
+				</div>
 			{/if}
 		</div>
 	</div>
