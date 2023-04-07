@@ -167,11 +167,6 @@
 				{#if $page.data.session.user?.image}
 					<span style="background-image: url('{$page.data.session.user.image}')" class="avatar" />
 				{/if}
-				<span class="signedInText">
-					<strong class="mx-2 text-accent hidden lg:flex"
-						>{$page.data.session.user?.name ?? 'User'}</strong
-					>
-				</span>
 				<button
 					class="btn btn-sm btn-outline btn-secondary link no-underline"
 					on:click={() => signOut()}>Logout</button

@@ -262,7 +262,7 @@
 			<div class="flex justify-between content-center">
 				<span class={showDebug ? 'text-warning' : ''}>Form Debugger</span>
 				{#if showDebug}
-					<span transition:fly={{ y: -200, duration: 200 }}>🐞</span>
+					<span transition:fly={{ y: 200, duration: 200 }}>🐞</span>
 				{/if}
 				<Switch bind:checked={showDebug} />
 			</div>

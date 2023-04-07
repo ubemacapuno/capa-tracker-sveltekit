@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { sendToast } from '$lib/stores/toast';
 	import ChatMessage from '$lib/components/ChatMessage.svelte';
 	import type { ChatCompletionRequestMessage } from 'openai';
@@ -77,10 +78,18 @@
 		</div>
 		<div class="h-[500px] w-full bg-base-300 rounded-md p-4 overflow-y-auto flex flex-col gap-4">
 			<div class="flex flex-col gap-2">
-				<ChatMessage
-					type="assistant"
-					message="Hello! I am a Virtual Assistant for CAPATracker. Ask me anything!"
-				/>
+				{#if $page?.data?.session?.user?.name}
+					<ChatMessage
+						type="assistant"
+						message="Hi {$page?.data?.session?.user
+							?.name}! I am a Virtual Assistant for CAPATracker. Ask me anything!"
+					/>
+				{:else}
+					<ChatMessage
+						type="assistant"
+						message="Hello! I am a Virtual Assistant for CAPATracker. Ask me anything!"
+					/>
+				{/if}
 				{#each chatMessages as message}
 					<ChatMessage type={message.role} message={message.content} />
 				{/each}
