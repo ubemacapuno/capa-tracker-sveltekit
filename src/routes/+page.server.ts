@@ -8,6 +8,7 @@ export const load: PageServerLoad = async (event) => {
 	const data = await capas.find({}, { sort: { order: 1 } }).toArray();
 
 	return {
+		// Fix this - Should only return capaReports when session is validated!
 		capaReports: fix_pojo(data),
 		session: await event.locals.getSession()
 	};
