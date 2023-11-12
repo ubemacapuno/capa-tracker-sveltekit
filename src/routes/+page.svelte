@@ -16,10 +16,6 @@
 	<div class="card bg-base-300 max-w-3xl shadow-xl mx-1">
 		<div class="card-body">
 			<strong class="text-warning text-3xl">Please sign in for complete access!</strong>
-			<p class="mt-5 text-error text-md italic">
-				*NOTE: CAPA Tracker is under construction and authentication may become disconnected from
-				production, preventing login access!*
-			</p>
 			<button class="mt-10 btn btn-primary" on:click={() => signIn('github')}>Sign In</button>
 		</div>
 	</div>
